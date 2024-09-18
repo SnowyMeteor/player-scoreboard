@@ -1,0 +1,168 @@
+/* 設定記分板的主要容器 */
+.scoreboard-container {
+    display: flex;                /* 使用彈性佈局，使子元素能夠靈活排列 */
+    flex-direction: column;       /* 子元素垂直排列 */
+    align-items: center;          /* 子元素水平置中對齊 */
+    padding: 0 10%;               /* 上下內邊距為0，左右內邊距為10% */
+    width: 100%;                  /* 寬度佔滿父容器 */
+}
+
+/* 設定玩家輸入區的容器 */
+.players-header {
+    display: flex;                /* 使用彈性佈局 */
+    justify-content: space-between; /* 子元素之間平均分配空間 */
+    width: 100%;                  /* 寬度佔滿父容器 */
+    margin-bottom: 0.5rem;          /* 底部外邊距為1rem，用於與下方內容分隔 */
+}
+
+/* 設定隊伍標題的容器 */
+.team-header {
+    width: 100%;                  /* 寬度佔滿父容器 */
+    text-align: center;           /* 文字置中對齊 */
+    margin-bottom: 10px;          /* 底部外邊距為10px，與下方內容分隔 */
+    padding: 8px;                 /* 內邊距為8px，增加內容與邊框的距離 */
+    border-radius: 5px;           /* 邊框圓角為5px，讓容器更具圓滑感 */
+}
+
+/* 我方隊伍標題的背景顏色 */
+.team-header.our {
+    background-color: #87CEEB;    /* 天藍色背景，區分我方隊伍 */
+}
+
+/* 敵方隊伍標題的背景顏色 */
+.team-header.enemy {
+    background-color: #FF6347;    /* 番茄紅色背景，區分敵方隊伍 */
+}
+
+/* 隊伍標題文字的樣式 */
+.team-label {
+    font-size: 16px;              /* 字體大小為16px */
+    font-weight: bold;            /* 字體加粗，突出顯示 */
+    color: #FFFFFF;               /* 文字顏色為白色，與背景形成對比 */
+}
+
+/* 單個玩家輸入框的容器 */
+.player-input {
+    width: 45%;                   /* 寬度為父容器的45% */
+}
+
+/* 玩家輸入區之間的間隔 */
+.player-spacer {
+    width: 10%;                   /* 寬度為父容器的10%，用於分隔兩個玩家輸入框 */
+}
+
+/* 玩家姓名輸入框的樣式 */
+.player-name-input {
+    width: 100%;                  /* 寬度佔滿父容器 */
+    text-align: center !important;/* 文字置中對齊，使用 !important 提高優先級 */
+}
+
+/* 玩家姓名輸入框的佔位符（placeholder）文字樣式 */
+.player-name-input::placeholder {
+    text-align: center !important;/* 佔位符文字置中對齊，使用 !important 提高優先級 */
+}
+
+/* 記分區塊的容器樣式 */
+.score-section {
+    width: 100%;                  /* 寬度佔滿父容器 */
+    margin-bottom: 0.5rem;        /* 底部外邊距為0.5rem，分隔各個記分區塊 */
+    padding: 0.5rem;              /* 內邊距為0.5rem，增加內容與邊框的距離 */
+    border-radius: 5px;           /* 邊框圓角為5px，讓區塊看起來更柔和 */
+}
+
+/* 類別標籤的樣式，例如「進攻」、「防守」 */
+.category-label {
+    font-weight: bold;            /* 字體加粗，突出顯示 */
+    font-size: 1rem;              /* 字體大小為1rem */
+    text-align: center;           /* 文字置中對齊 */
+    margin-bottom: 0.5rem;          /* 底部外邊距為0.5rem，與下方內容分隔 */
+}
+
+/* 記分行的樣式，包括一般和特殊記分行 */
+.score-row,
+.special-row {
+    display: flex;                /* 使用彈性佈局 */
+    justify-content: space-between; /* 子元素之間平均分配空間 */
+    align-items: center;          /* 子元素垂直置中對齊 */
+    margin-bottom: 0.5rem;        /* 底部外邊距為0.5rem */
+}
+
+/* 玩家得分區域的樣式，包括加減按鈕和得分顯示 */
+.player-score {
+    display: flex;                /* 使用彈性佈局 */
+    align-items: center;          /* 子元素垂直置中對齊 */
+    justify-content: center;      /* 子元素水平置中對齊 */
+    width: 40%;                   /* 寬度為父容器的40% */
+}
+
+/* 成功與失敗標籤的樣式，顯示「O」或「X」 */
+.success-label,
+.fail-label {
+    font-weight: bold;            /* 字體加粗 */
+    font-size: 1rem;              /* 字體大小為1rem */
+}
+
+/* 特殊記分行的類別標籤樣式 */
+.special-row .category-label {
+    flex: 1;                      /* 佔用彈性容器剩餘空間的比例為1 */
+    text-align: center;           /* 文字置中對齊 */
+    margin: 0 10px;               /* 左右外邊距為10px，增加與周圍元素的間距 */
+}
+
+/* 特殊記分行的玩家得分區域樣式 */
+.special-row .player-score {
+    flex: 2;                      /* 佔用彈性容器剩餘空間的比例為2 */
+    display: flex;                /* 使用彈性佈局 */
+    justify-content: space-between; /* 子元素之間平均分配空間 */
+    align-items: center;          /* 子元素垂直置中對齊 */
+}
+
+/* 記分輸入框的樣式，用於顯示得分數字 */
+.score-input {
+    width: 40px !important;         /* 輸入框寬度設為40px，使用 !important 提高優先級 */
+    text-align: center !important;  /* 文字置中對齊，使用 !important 提高優先級 */
+}
+
+/* 加減按鈕的樣式 */
+.score-button {
+    width: 2rem !important;         /* 按鈕寬度設為2rem，使用 !important 提高優先級 */
+    height: 2rem !important;        /* 按鈕高度設為2rem，使用 !important 提高優先級 */
+}
+
+/* 針對記分板容器內的所有輸入框設定樣式 */
+.scoreboard-container .p-inputtext {
+    padding-left: 0px !important;   /* 移除左側內邊距，使用 !important 提高優先級 */
+    text-align: center !important;  /* 文字置中對齊，使用 !important 提高優先級 */
+}
+
+/* 次要按鈕在滑鼠懸停時的樣式 */
+.p-button-secondary:hover {
+    background-color: #e9ecef;    /* 背景色變為淡灰色 */
+    color: #495057;               /* 文字顏色變為深灰色 */
+    border-color: #adb5bd;        /* 邊框顏色變為灰色 */
+}
+
+/* 進攻區塊的背景顏色 */
+.attack {
+    background-color: #FFE0E0;    /* 淡紅色背景 */
+}
+
+/* 防守區塊的背景顏色 */
+.defense {
+    background-color: #E0FFE0;    /* 淡綠色背景 */
+}
+
+/* 中場處理區塊的背景顏色 */
+.midfield {
+    background-color: #E0E0FF;    /* 淡藍色背景 */
+}
+
+/* 機會球區塊的背景顏色 */
+.chance {
+    background-color: #FFFFE0;    /* 淡黃色背景 */
+}
+
+/* 落地擊球區塊的背景顏色 */
+.smash {
+    background-color: #FFE0FF;    /* 淡紫色背景 */
+}

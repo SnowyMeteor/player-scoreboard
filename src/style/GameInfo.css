@@ -1,0 +1,64 @@
+/* 設定遊戲資訊的主要容器 */
+.game-info-container {
+    padding-top: 30px;      /* 上方內邊距為30px，增加與上方元素的距離 */
+    padding-left: 10%;      /* 左右內邊距各為10%，使內容居中且有適當留白 */
+    padding-right: 10%;
+}
+
+/* 每個資訊項目的樣式 */
+.game-info-item {
+    margin-bottom: 0.7rem;  /* 底部外邊距為0.7rem，分隔各個資訊項目 */
+}
+
+/* 設定勝負和比數的容器為一行 */
+.game-info-row {
+    display: flex;                /* 使用彈性佈局，使子元素水平排列 */
+    justify-content: space-between; /* 子元素之間平均分配空間 */
+    margin-bottom: 0.7rem;        /* 底部外邊距為0.7rem */
+}
+
+/* 行內的列樣式 */
+.game-info-column {
+    display: flex;                /* 使用彈性佈局 */
+    flex-direction: column;       /* 子元素垂直排列 */
+    width: 48%;                   /* 寬度為父容器的48%，兩列併排 */
+}
+
+/* 左側列的額外樣式 */
+.game-info-column-left {
+    margin-right: 4%;             /* 右側外邊距為4%，增加與右側列的間距 */
+}
+
+/* 調整所有下拉選單和輸入框的高度 */
+.p-dropdown,
+.p-inputtext {
+    height: 38px;                 /* 高度統一為38px */
+}
+
+/* 調整輸入框的內邊距 */
+.p-inputtext {
+    padding-left: 0px;            /* 左側內邊距為0，移除預設的間距 */
+}
+
+/* 調整輸入框的佔位符（placeholder）文字樣式 */
+.p-inputtext::placeholder {
+    text-align: left;             /* 佔位符文字左對齊 */
+}
+
+/* 調整下拉選單的標籤樣式 */
+.p-dropdown .p-dropdown-label {
+    display: flex;                /* 使用彈性佈局 */
+    align-items: center;          /* 子元素垂直置中對齊 */
+    justify-content: flex-start;  /* 子元素水平靠左對齊 */
+}
+
+/* 調整比數輸入框的樣式 */
+.game-info-score-input {
+    width: 100% !important;       /* 寬度佔滿父容器，使用 !important 提高優先級 */
+    text-align: left !important;  /* 文字左對齊，使用 !important 提高優先級 */
+}
+
+/* 調整局數下拉選單的選項文字顏色 */
+.rounds-option {
+    color: #4682B4;               /* 設定文字顏色為鋼藍色 */
+}
