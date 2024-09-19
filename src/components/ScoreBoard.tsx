@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import '../style/ScoreBoard.css';
 
 type Category = 'attack' | 'defense' | 'midfield' | 'chance' | 'smash';
 type SpecialCategory = 'firstServeRate' | 'receiveErrorRate' | 'servePoints' | 'doubleFaults';
-type Player = 'player1' | 'player2';
 
 interface CategoryScores {
     success: number;
@@ -24,65 +23,51 @@ interface PlayerScores {
     doubleFaults: number;
 }
 
-interface Scores {
-    player1: PlayerScores;
-    player2: PlayerScores;
+interface TeamScores {
+    [key: string]: PlayerScores;
+}
+
+interface TeamData {
+    player1: string;
+    player2: string;
+    scores: TeamScores;
 }
 
 interface ScoreBoardProps {
     team: 'our' | 'enemy';
+    data: TeamData;
+    onDataChange: (data: TeamData) => void;
 }
 
-const initialCategoryScores: CategoryScores = { success: 0, fail: 0 };
+const ScoreBoard: React.FC<ScoreBoardProps> = ({ team, data, onDataChange }) => {
+    const handlePlayerChange = (player: 'player1' | 'player2', value: string) => {
+        onDataChange({
+            ...data,
+            [player]: value
+        });
+    };
 
-const initialPlayerScores: PlayerScores = {
-    attack: { ...initialCategoryScores },
-    defense: { ...initialCategoryScores },
-    midfield: { ...initialCategoryScores },
-    chance: { ...initialCategoryScores },
-    smash: { ...initialCategoryScores },
-    firstServeRate: 0,
-    receiveErrorRate: 0,
-    servePoints: 0,
-    doubleFaults: 0
-};
+    const changeScore = (player: string, category: Category | SpecialCategory, success: boolean, increment: boolean) => {
+        const newScores = { ...data.scores };
+        if (typeof newScores[player][category] === 'number') {
+            (newScores[player][category] as number) = Math.max(0, (newScores[player][category] as number) + (increment ? 1 : -1));
+        } else {
+            (newScores[player][category] as CategoryScores)[success ? 'success' : 'fail'] =
+                Math.max(0, (newScores[player][category] as CategoryScores)[success ? 'success' : 'fail'] + (increment ? 1 : -1));
+        }
+        onDataChange({
+            ...data,
+            scores: newScores
+        });
+    };
 
-const ScoreBoard: React.FC<ScoreBoardProps> = ({ team }) => {
-    const [players, setPlayers] = useState({ player1: '', player2: '' });
-    const [scores, setScores] = useState<Scores>({
-        player1: { ...initialPlayerScores },
-        player2: { ...initialPlayerScores }
-    });
+    const incrementScore = (player: string, category: Category | SpecialCategory, success: boolean) => {
+        changeScore(player, category, success, true);
+    };
 
-    const incrementScore = (player: Player, category: Category | SpecialCategory, success: boolean) => {
-        setScores(prevScores => ({
-            ...prevScores,
-            [player]: {
-                ...prevScores[player],
-                [category]: typeof prevScores[player][category] === 'number'
-                    ? (prevScores[player][category] as number) + 1
-                    : {
-                        ...(prevScores[player][category] as CategoryScores),
-                        [success ? 'success' : 'fail']: (prevScores[player][category] as CategoryScores)[success ? 'success' : 'fail'] + 1
-                    }
-            }
-        }));
-    }
-
-    const decrementScore = (player: Player, category: Category | SpecialCategory, success: boolean) => {
-        setScores(prevScores => ({
-            ...prevScores,
-            [player]: {
-                ...prevScores[player],
-                [category]: typeof prevScores[player][category] === 'number'
-                    ? Math.max(0, (prevScores[player][category] as number) - 1)
-                    : {
-                        ...(prevScores[player][category] as CategoryScores),
-                        [success ? 'success' : 'fail']: Math.max(0, (prevScores[player][category] as CategoryScores)[success ? 'success' : 'fail'] - 1)
-                    }
-            }
-        }));
-    }
+    const decrementScore = (player: string, category: Category | SpecialCategory, success: boolean) => {
+        changeScore(player, category, success, false);
+    };
 
     const renderScoreSection = (category: Category, label: string) => (
         <div className={`score-section ${category}`}>
@@ -90,26 +75,26 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({ team }) => {
             <div className="score-row">
                 <div className="player-score">
                     <Button icon="pi pi-minus" onClick={() => decrementScore('player1', category, true)} className="p-button-secondary score-button" />
-                    <InputText value={scores.player1[category].success.toString()} className="score-input" readOnly />
+                    <InputText value={data.scores.player1[category].success.toString()} className="score-input" readOnly />
                     <Button icon="pi pi-plus" onClick={() => incrementScore('player1', category, true)} className="p-button-secondary score-button" />
                 </div>
                 <div className="success-label">O</div>
                 <div className="player-score">
                     <Button icon="pi pi-minus" onClick={() => decrementScore('player2', category, true)} className="p-button-secondary score-button" />
-                    <InputText value={scores.player2[category].success.toString()} className="score-input" readOnly />
+                    <InputText value={data.scores.player2[category].success.toString()} className="score-input" readOnly />
                     <Button icon="pi pi-plus" onClick={() => incrementScore('player2', category, true)} className="p-button-secondary score-button" />
                 </div>
             </div>
             <div className="score-row">
                 <div className="player-score">
                     <Button icon="pi pi-minus" onClick={() => decrementScore('player1', category, false)} className="p-button-secondary score-button" />
-                    <InputText value={scores.player1[category].fail.toString()} className="score-input" readOnly />
+                    <InputText value={data.scores.player1[category].fail.toString()} className="score-input" readOnly />
                     <Button icon="pi pi-plus" onClick={() => incrementScore('player1', category, false)} className="p-button-secondary score-button" />
                 </div>
                 <div className="fail-label">X</div>
                 <div className="player-score">
                     <Button icon="pi pi-minus" onClick={() => decrementScore('player2', category, false)} className="p-button-secondary score-button" />
-                    <InputText value={scores.player2[category].fail.toString()} className="score-input" readOnly />
+                    <InputText value={data.scores.player2[category].fail.toString()} className="score-input" readOnly />
                     <Button icon="pi pi-plus" onClick={() => incrementScore('player2', category, false)} className="p-button-secondary score-button" />
                 </div>
             </div>
@@ -135,7 +120,7 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({ team }) => {
             <div className="special-row">
                 <div className="player-score">
                     <Button icon="pi pi-minus" onClick={() => decrementScore('player1', category, true)} className="p-button-secondary score-button" />
-                    <InputText value={scores.player1[category].toString()} className="score-input" readOnly />
+                    <InputText value={data.scores.player1[category].toString()} className="score-input" readOnly />
                     <Button icon="pi pi-plus" onClick={() => incrementScore('player1', category, true)} className="p-button-secondary score-button" />
                 </div>
                 <div className="category-label" style={{ whiteSpace: 'pre-wrap' }}>
@@ -143,7 +128,7 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({ team }) => {
                 </div>
                 <div className="player-score">
                     <Button icon="pi pi-minus" onClick={() => decrementScore('player2', category, true)} className="p-button-secondary score-button" />
-                    <InputText value={scores.player2[category].toString()} className="score-input" readOnly />
+                    <InputText value={data.scores.player2[category].toString()} className="score-input" readOnly />
                     <Button icon="pi pi-plus" onClick={() => incrementScore('player2', category, true)} className="p-button-secondary score-button" />
                 </div>
             </div>
@@ -158,8 +143,8 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({ team }) => {
             <div className="players-header">
                 <div className="player-input">
                     <InputText
-                        value={players.player1}
-                        onChange={(e) => setPlayers(prev => ({ ...prev, player1: e.target.value }))}
+                        value={data.player1}
+                        onChange={(e) => handlePlayerChange('player1', e.target.value)}
                         placeholder="選手1"
                         className="player-name-input"
                     />
@@ -167,8 +152,8 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({ team }) => {
                 <div className="player-spacer"></div>
                 <div className="player-input">
                     <InputText
-                        value={players.player2}
-                        onChange={(e) => setPlayers(prev => ({ ...prev, player2: e.target.value }))}
+                        value={data.player2}
+                        onChange={(e) => handlePlayerChange('player2', e.target.value)}
                         placeholder="選手2"
                         className="player-name-input"
                     />
@@ -187,4 +172,4 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({ team }) => {
     );
 }
 
-export default ScoreBoard;
+export default React.memo(ScoreBoard);

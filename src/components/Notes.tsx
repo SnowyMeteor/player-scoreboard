@@ -2,7 +2,12 @@ import React from 'react';
 import { InputTextarea } from 'primereact/inputtextarea';
 import '../style/Notes.css';
 
-const Notes = () => {
+interface NotesProps {
+    value: string;
+    onChange: (value: string) => void;
+}
+
+const Notes: React.FC<NotesProps> = ({ value, onChange }) => {
     return (
         <div className="note-container">
             <div className="note-item">
@@ -10,7 +15,9 @@ const Notes = () => {
                 <InputTextarea
                     id="notes"
                     rows={5}
-                    placeholder="輸入註記"
+                    value={value}
+                    onChange={(e) => onChange(e.target.value)}
+                    placeholder="輸入註記..."
                     autoResize
                     className="input-textarea text-left"
                 />

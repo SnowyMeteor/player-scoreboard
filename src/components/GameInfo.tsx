@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import '../style/GameInfo.css';
@@ -9,17 +9,45 @@ const winLossOptions = [
     { label: '負', value: 'lose' }
 ];
 
-const GameInfo: React.FC = () => {
+interface GameInfoProps {
+    currentRound: number;
+    onRoundChange: (round: number) => void;
+}
+
+const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange }) => {
+    const [gameName, setGameName] = useState('');
     const [score, setScore] = useState('');
-    const [rounds, setRounds] = useState<number | null>(null);
     const [result, setResult] = useState<string | null>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.setSelectionRange(0, 0);
+        }
+    }, []);
 
     const handleScoreChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        if (/^[0-9:]*$/.test(value)) {
-            setScore(value);
+        const value = e.target.value.replace(/[^0-9]/g, '');
+        let formattedValue = ':';
+
+        if (value.length > 0) {
+            const left = value.slice(0, 2).padStart(2, '0');
+            formattedValue = left + formattedValue;
         }
-    }
+        if (value.length > 2) {
+            const right = value.slice(2, 4).padStart(2, '0');
+            formattedValue = formattedValue + right;
+        }
+
+        setScore(formattedValue);
+
+        setTimeout(() => {
+            if (inputRef.current) {
+                const cursorPosition = value.length > 2 ? value.length + 1 : value.length;
+                inputRef.current.setSelectionRange(cursorPosition, cursorPosition);
+            }
+        }, 0);
+    };
 
     return (
         <div className="p-fluid game-info-container">
@@ -28,6 +56,8 @@ const GameInfo: React.FC = () => {
                 <label htmlFor="gameName" className="block font-bold mb-2 text-left">比賽名稱</label>
                 <InputText
                     id="gameName"
+                    value={gameName}
+                    onChange={(e) => setGameName(e.target.value)}
                     placeholder="輸入比賽名稱"
                     className="w-full text-left"
                 />
@@ -39,8 +69,8 @@ const GameInfo: React.FC = () => {
                 <Dropdown
                     id="rounds"
                     options={roundsOptions}
-                    value={rounds}
-                    onChange={(e) => setRounds(e.value)}
+                    value={currentRound}
+                    onChange={(e) => onRoundChange(e.value)}
                     placeholder="選擇局數"
                     className="w-full text-left"
                     itemTemplate={(option) => (
@@ -69,11 +99,10 @@ const GameInfo: React.FC = () => {
                     <label htmlFor="score" className="block font-bold mb-2 text-left">比數</label>
                     <InputText
                         id="score"
+                        ref={inputRef}
                         placeholder="輸入比數"
                         value={score}
                         onChange={handleScoreChange}
-                        keyfilter={/^[0-9:]*$/}
-                        maxLength={5}
                         className="w-full text-left game-info-score-input"
                     />
                 </div>
