@@ -3,6 +3,7 @@ import { useSwipeable } from 'react-swipeable';
 import './App.css';
 import GameInfo from './components/GameInfo';
 import ScoreBoard from './components/ScoreBoard';
+import StatisticsBoard from './components/StatisticsBoard';
 import Notes from './components/Notes';
 
 type Category = 'attack' | 'defense' | 'midfield' | 'chance' | 'smash';
@@ -64,6 +65,8 @@ function App() {
   const [index, setIndex] = useState(0);
   const [currentRound, setCurrentRound] = useState(1);
   const [roundsData, setRoundsData] = useState<RoundData[]>([]);
+  const [showStatistics, setShowStatistics] = useState(false);
+  const [currentTeam, setCurrentTeam] = useState<'our' | 'enemy'>('our');
 
   useEffect(() => {
     // 初始化第一局的數據
@@ -148,35 +151,71 @@ function App() {
     });
   }, [currentRound]);
 
+  const handleShowStatistics = () => {
+    setShowStatistics(true);
+  };
+
+  const handleBackToGame = () => {
+    setShowStatistics(false);
+  };
+
   return (
     <div className="App">
-      <GameInfo currentRound={currentRound} onRoundChange={handleRoundChange} />
-      <div {...handlers} style={{ overflow: 'hidden' }}>
-        <div style={{
-          display: 'flex',
-          transition: 'transform 0.3s ease-out',
-          transform: `translateX(-${index * 100}%)`
-        }}>
-          <div className="scoreboard-wrapper" style={{ flex: '0 0 100%' }}>
-            <ScoreBoard
-              team="our"
-              data={roundsData[currentRound - 1]?.ourTeam || { player1: '', player2: '', scores: initialTeamScores }}
-              onDataChange={(data) => updateTeamData('ourTeam', data)}
-            />
-          </div>
-          <div className="scoreboard-wrapper" style={{ flex: '0 0 100%' }}>
-            <ScoreBoard
-              team="enemy"
-              data={roundsData[currentRound - 1]?.enemyTeam || { player1: '', player2: '', scores: initialTeamScores }}
-              onDataChange={(data) => updateTeamData('enemyTeam', data)}
-            />
+      <GameInfo
+        currentRound={currentRound}
+        onRoundChange={handleRoundChange}
+        onShowStatistics={handleShowStatistics}
+        onBackToGame={handleBackToGame}
+      />
+      {showStatistics ? (
+        <div className="statistics-container">
+          <StatisticsBoard
+            ourTeam={{
+              team: 'our',
+              roundsData: roundsData,
+              player1Name: roundsData[0]?.ourTeam.player1 || '',
+              player2Name: roundsData[0]?.ourTeam.player2 || ''
+            }}
+            enemyTeam={{
+              team: 'enemy',
+              roundsData: roundsData,
+              player1Name: roundsData[0]?.enemyTeam.player1 || '',
+              player2Name: roundsData[0]?.enemyTeam.player2 || ''
+            }}
+            currentTeam={currentTeam}
+            onSwipe={setCurrentTeam}
+          />
+        </div>
+      ) : (
+        <div {...handlers} style={{ overflow: 'hidden' }}>
+          <div style={{
+            display: 'flex',
+            transition: 'transform 0.3s ease-out',
+            transform: `translateX(-${index * 100}%)`
+          }}>
+            <div className="scoreboard-wrapper" style={{ flex: '0 0 100%' }}>
+              <ScoreBoard
+                team="our"
+                data={roundsData[currentRound - 1]?.ourTeam || { player1: '', player2: '', scores: initialTeamScores }}
+                onDataChange={(data) => updateTeamData('ourTeam', data)}
+              />
+            </div>
+            <div className="scoreboard-wrapper" style={{ flex: '0 0 100%' }}>
+              <ScoreBoard
+                team="enemy"
+                data={roundsData[currentRound - 1]?.enemyTeam || { player1: '', player2: '', scores: initialTeamScores }}
+                onDataChange={(data) => updateTeamData('enemyTeam', data)}
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <Notes
-        value={roundsData[currentRound - 1]?.notes || ''}
-        onChange={updateNotes}
-      />
+      )}
+      {!showStatistics && (
+        <Notes
+          value={roundsData[currentRound - 1]?.notes || ''}
+          onChange={updateNotes}
+        />
+      )}
     </div>
   );
 }

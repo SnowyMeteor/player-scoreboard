@@ -1,53 +1,40 @@
-/* 設定註記區域的主要容器 */
 .note-container {
-    padding-left: 10%;      /* 左右內邊距各為10%，使內容居中且有適當留白 */
+    padding-left: 10%;
     padding-right: 10%;
 }
 
-/* 每個註記項目的樣式 */
-.note-item {
-    margin-bottom: 0.7rem;  /* 底部外邊距為0.7rem，分隔各個註記項目 */
-}
-
-/* 設定元素為塊級元素 */
 .block {
-    display: block;         /* 將元素顯示為塊級元素，占據整行寬度 */
+    display: block;
 }
 
-/* 設定字體加粗 */
 .font-bold {
-    font-weight: bold;      /* 字體加粗，突出顯示 */
+    font-weight: bold;
 }
 
-/* 設定底部外邊距 */
 .mb-2 {
-    margin-bottom: 0.5rem;  /* 底部外邊距為0.5rem，與下方內容分隔 */
+    margin-bottom: 0.5rem;
 }
 
-/* 設定文字左對齊 */
 .text-left {
-    text-align: left;       /* 文字左對齊 */
+    text-align: left;
 }
 
-/* 設定寬度佔滿父容器 */
 .w-full {
-    width: 100%;            /* 寬度佔滿父容器 */
+    width: 100%;
 }
 
-/* 調整輸入框的樣式 */
 .input-textarea {
-    width: 100%;                    /* 寬度佔滿父容器 */
-    min-height: 90px;              /* 最小高度為90px，約為3行的高度 */
-    border: 0.5px solid #dcdcdc;      /* 邊框設定為1px的實線，顏色為淺灰色 */
-    border-radius: 5px;             /* 邊框圓角為4px，讓輸入框看起來更柔和 */
-    padding: 8px;                   /* 內邊距為8px，增加內容與邊框的距離 */
-    box-shadow: 0 0 5px rgba(0,0,0,0.1); /* 添加輕微的陰影，提示可輸入 */
-    resize: vertical;               /* 允許使用者垂直調整輸入框高度 */
-    box-sizing: border-box;         /* 設定盒模型為 border-box，確保 padding 和 border 不會影響總寬度 */
+    width: 100%;
+    min-height: 90px;
+    border: 0.5px solid #dcdcdc;
+    border-radius: 5px;
+    padding: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    resize: vertical;
+    box-sizing: border-box;
 }
 
-/* 調整佔位符（placeholder）文字的樣式 */
 .input-textarea::placeholder {
-    color: #999999;                 /* 佔位符文字顏色為淺灰色 */
-    text-align: left;               /* 文字左對齊 */
+    color: #999999;
+    text-align: left;
 }

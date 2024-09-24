@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
+import { Button } from 'primereact/button';
 import '../style/GameInfo.css';
 
 const roundsOptions = Array.from({ length: 6 }, (_, i) => ({ label: `${i + 1}`, value: i + 1 }));
@@ -12,9 +13,11 @@ const winLossOptions = [
 interface GameInfoProps {
     currentRound: number;
     onRoundChange: (round: number) => void;
+    onShowStatistics: () => void;
+    onBackToGame: () => void;
 }
 
-const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange }) => {
+const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange, onShowStatistics, onBackToGame }) => {
     const [gameName, setGameName] = useState('');
     const [score, setScore] = useState('');
     const [result, setResult] = useState<string | null>(null);
@@ -105,6 +108,16 @@ const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange }) => {
                         onChange={handleScoreChange}
                         className="w-full text-left game-info-score-input"
                     />
+                </div>
+            </div>
+
+            {/* 統計結果、回到比賽按鈕 */}
+            <div className="game-info-row">
+                <div className="game-info-column game-info-column-left">
+                    <Button label="統計結果" className="p-button-statistics w-full" onClick={onShowStatistics} />
+                </div>
+                <div className="game-info-column game-info-column-right">
+                    <Button label="回到比賽" className="p-button-back-to-game w-full" onClick={onBackToGame} />
                 </div>
             </div>
         </div>

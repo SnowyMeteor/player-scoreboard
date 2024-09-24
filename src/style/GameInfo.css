@@ -1,64 +1,104 @@
-/* 設定遊戲資訊的主要容器 */
 .game-info-container {
-    padding-top: 30px;      /* 上方內邊距為30px，增加與上方元素的距離 */
-    padding-left: 10%;      /* 左右內邊距各為10%，使內容居中且有適當留白 */
+    padding-top: 30px;
+    padding-left: 10%;
     padding-right: 10%;
 }
 
-/* 每個資訊項目的樣式 */
-.game-info-item {
-    margin-bottom: 0.7rem;  /* 底部外邊距為0.7rem，分隔各個資訊項目 */
+.game-info-container .game-info-item {
+    margin-bottom: 0.7rem;
 }
 
-/* 設定勝負和比數的容器為一行 */
-.game-info-row {
-    display: flex;                /* 使用彈性佈局，使子元素水平排列 */
-    justify-content: space-between; /* 子元素之間平均分配空間 */
-    margin-bottom: 0.7rem;        /* 底部外邊距為0.7rem */
+.game-info-container .game-info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
 }
 
-/* 行內的列樣式 */
-.game-info-column {
-    display: flex;                /* 使用彈性佈局 */
-    flex-direction: column;       /* 子元素垂直排列 */
-    width: 48%;                   /* 寬度為父容器的48%，兩列併排 */
+.game-info-container .game-info-column {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
 }
 
-/* 左側列的額外樣式 */
-.game-info-column-left {
-    margin-right: 4%;             /* 右側外邊距為4%，增加與右側列的間距 */
+.game-info-container .game-info-column-left {
+    margin-right: 4%;
 }
 
-/* 調整所有下拉選單和輸入框的高度 */
-.p-dropdown,
-.p-inputtext {
-    height: 38px;                 /* 高度統一為38px */
+.game-info-container .p-dropdown,
+.game-info-container .p-inputtext {
+    height: 38px;
 }
 
-/* 調整輸入框的內邊距 */
-.p-inputtext {
-    padding-left: 0px;            /* 左側內邊距為0，移除預設的間距 */
+.game-info-container .p-button {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* 調整輸入框的佔位符（placeholder）文字樣式 */
-.p-inputtext::placeholder {
-    text-align: left;             /* 佔位符文字左對齊 */
+.game-info-container .p-inputtext {
+    padding-left: 0px;
 }
 
-/* 調整下拉選單的標籤樣式 */
-.p-dropdown .p-dropdown-label {
-    display: flex;                /* 使用彈性佈局 */
-    align-items: center;          /* 子元素垂直置中對齊 */
-    justify-content: flex-start;  /* 子元素水平靠左對齊 */
+.game-info-container .p-inputtext::placeholder {
+    text-align: left;
 }
 
-/* 調整比數輸入框的樣式 */
-.game-info-score-input {
-    width: 100% !important;       /* 寬度佔滿父容器，使用 !important 提高優先級 */
-    text-align: left !important;  /* 文字左對齊，使用 !important 提高優先級 */
+.game-info-container .p-dropdown .p-dropdown-label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-/* 調整局數下拉選單的選項文字顏色 */
-.rounds-option {
-    color: #4682B4;               /* 設定文字顏色為鋼藍色 */
+.game-info-container .game-info-score-input {
+    width: 100% !important;
+    text-align: left !important;
+}
+
+.game-info-container .rounds-option {
+    color: #4682B4;
+}
+
+.game-info-container .p-button.p-button-info {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.game-info-container .p-button.p-button-info:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+}
+
+.game-info-container .p-button.p-button-secondary {
+    background-color: #95a5a6;
+    border-color: #95a5a6;
+}
+
+.game-info-container .p-button.p-button-secondary:hover {
+    background-color: #7f8c8d;
+    border-color: #7f8c8d;
+}
+
+.game-info-container .p-button.p-button-statistics {
+    background-color: #FFC466;
+    border-color: #FFC466;
+    color: #ffffff;
+    border-radius: 30px;
+}
+
+.game-info-container .p-button.p-button-statistics:hover {
+    background-color: #FFB74D;
+    border-color: #FFB74D;
+}
+
+.game-info-container .p-button.p-button-back-to-game {
+    background-color: #9CCC65;
+    border-color: #9CCC65;
+    color: #ffffff;
+    border-radius: 30px;
+}
+
+.game-info-container .p-button.p-button-back-to-game:hover {
+    background-color: #8BC34A;
+    border-color: #8BC34A;
 }

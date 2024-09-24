@@ -1,4 +1,4 @@
-.scoreboard-container {
+.statistics-board-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,14 +6,14 @@
     width: 100%;
 }
 
-.scoreboard-container .players-header {
+.statistics-board-container .players-header {
     display: flex;
     justify-content: space-between;
     width: 100%;
     margin-bottom: 0.5rem;
 }
 
-.scoreboard-container .team-header {
+.statistics-board-container .team-header {
     width: 100%;
     text-align: center;
     margin-bottom: 10px;
@@ -21,30 +21,26 @@
     border-radius: 5px;
 }
 
-.scoreboard-container .team-header.our {
+.statistics-board-container .team-header.our {
     background-color: #87CEEB;
 }
 
-.scoreboard-container .team-header.enemy {
+.statistics-board-container .team-header.enemy {
     background-color: #FF6347;
 }
 
-.scoreboard-container .team-label {
+.statistics-board-container .team-label {
     font-size: 16px;
     font-weight: bold;
     color: #FFFFFF;
 }
 
-.scoreboard-container .player-input {
+.statistics-board-container .player-input {
     width: 45%;
     height: 35px;
 }
 
-.scoreboard-container .player-spacer {
-    width: 10%;
-}
-
-.scoreboard-container .player-name-input {
+.statistics-board-container .player-name-input {
     width: 100%;
     text-align: center !important;
     height: 100%;
@@ -54,18 +50,18 @@
     padding: 0.25rem !important;
 }
 
-.scoreboard-container .player-name-input::placeholder {
-    text-align: center !important;
+.statistics-board-container .player-spacer {
+    width: 10%;
 }
 
-.scoreboard-container .score-section {
+.statistics-board-container .statistics-section {
     width: 100%;
     margin-bottom: 0.7rem;
     padding: 0.5rem;
     border-radius: 10px;
 }
 
-.scoreboard-container .category-label {
+.statistics-board-container .category-label {
     font-weight: bold;
     font-size: 1rem;
     text-align: center;
@@ -73,28 +69,81 @@
     margin-bottom: 0.5rem;
 }
 
-.scoreboard-container .score-row,
-.scoreboard-container .special-row {
+.statistics-board-container .score-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.5rem;
 }
 
-.scoreboard-container .player-score {
+.statistics-board-container .special-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0;
+}
+
+.statistics-board-container .player-score {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 40%;
 }
 
-.scoreboard-container .success-label,
-.scoreboard-container .fail-label {
+.statistics-board-container .success-label,
+.statistics-board-container .fail-label {
     font-weight: bold;
     font-size: 1rem;
+    width: 20%;
+    text-align: center;
 }
 
-.scoreboard-container .special-row .category-label {
+.statistics-board-container .special-row .player-score {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.statistics-board-container .score-input {
+    width: 40px !important;
+    text-align: center !important;
+    background-color: #f4f4f4 !important;
+    cursor: default !important;
+    height: 2rem !important;
+}
+
+.statistics-board-container .p-inputtext {
+    padding-left: 0px !important;
+    text-align: center !important;
+}
+
+.statistics-board-container .attack {
+    background-color: #FFE0E0;
+}
+
+.statistics-board-container .defense {
+    background-color: #E0FFE0;
+}
+
+.statistics-board-container .midfield {
+    background-color: #E0E0FF;
+}
+
+.statistics-board-container .chance {
+    background-color: #FFFFE0;
+}
+
+.statistics-board-container .smash {
+    background-color: #FFE0FF;
+}
+
+.statistics-board-container .special {
+    background-color: #F0F0F0;
+}
+
+.statistics-board-container .special-row .category-label {
     flex: 1;
     text-align: center;
     margin: 0 10px;
@@ -104,63 +153,11 @@
     line-height: 1.2;
 }
 
-.scoreboard-container .special-row .player-score {
-    flex: 2;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.statistics-board-container .statistics-section.special {
+    margin-bottom: 0.3rem;
+    padding: 0.5rem;
 }
 
-.scoreboard-container .score-input {
-    width: 40px !important;
-    text-align: center !important;
-    background-color: #f4f4f4 !important;
-    cursor: default !important;
-    height: 2rem !important;
-}
-
-.scoreboard-container .score-button {
-    width: 2rem !important;
-    height: 2rem !important;
-    margin: 0 5px;
-}
-
-.scoreboard-container .p-inputtext {
-    padding-left: 0px !important;
-    text-align: center !important;
-}
-
-.scoreboard-container .p-button-secondary:hover {
-    background-color: #e9ecef;
-    color: #495057;
-    border-color: #adb5bd;
-}
-
-.scoreboard-container .attack {
-    background-color: #FFE0E0;
-}
-
-.scoreboard-container .defense {
-    background-color: #E0FFE0;
-}
-
-.scoreboard-container .midfield {
-    background-color: #E0E0FF;
-}
-
-.scoreboard-container .chance {
-    background-color: #FFFFE0;
-}
-
-.scoreboard-container .smash {
-    background-color: #FFE0FF;
-}
-
-.scoreboard-container .special {
-    background-color: #F0F0F0;
-}
-
-.game-info-container .game-info-row:last-child {
-    margin-bottom: 10px;
-    padding-bottom: 8px;
+.statistics-board-container .rate-input {
+    width: 60px !important;
 }
