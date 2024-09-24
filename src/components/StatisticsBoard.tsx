@@ -133,20 +133,20 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
                 <div className="category-label">{label}</div>
                 <div className="score-row">
                     <div className="player-score">
-                        <InputText value={player1Scores[category].success.toString()} className="score-input" readOnly />
+                        <InputText value={player1Scores[category].success.toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
                     </div>
                     <div className="success-label">O</div>
                     <div className="player-score">
-                        <InputText value={player2Scores[category].success.toString()} className="score-input" readOnly />
+                        <InputText value={player2Scores[category].success.toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
                     </div>
                 </div>
                 <div className="score-row">
                     <div className="player-score">
-                        <InputText value={player1Scores[category].fail.toString()} className="score-input" readOnly />
+                        <InputText value={player1Scores[category].fail.toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
                     </div>
                     <div className="fail-label">X</div>
                     <div className="player-score">
-                        <InputText value={player2Scores[category].fail.toString()} className="score-input" readOnly />
+                        <InputText value={player2Scores[category].fail.toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
                     </div>
                 </div>
             </div>
@@ -161,13 +161,13 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
             <div className="statistics-section special">
                 <div className="special-row">
                     <div className="player-score">
-                        <InputText value={player1Scores[category].toString()} className="score-input" readOnly />
+                        <InputText value={player1Scores[category].toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
                     </div>
                     <div className="category-label" style={{ whiteSpace: 'pre-wrap' }}>
                         {breakAfterSecondCharacter(label)}
                     </div>
                     <div className="player-score">
-                        <InputText value={player2Scores[category].toString()} className="score-input" readOnly />
+                        <InputText value={player2Scores[category].toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
                     </div>
                 </div>
             </div>
@@ -181,13 +181,13 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
             <div className="statistics-section special">
                 <div className="special-row">
                     <div className="player-score">
-                        <InputText value={`${rates.player1[label === '成功率' ? 'successRate' : 'failRate']}%`} className="score-input rate-input" readOnly />
+                        <InputText value={`${rates.player1[label === '成功率' ? 'successRate' : 'failRate']}%`} className="score-input rate-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
                     </div>
                     <div className="category-label" style={{ whiteSpace: 'pre-wrap' }}>
                         {label}
                     </div>
                     <div className="player-score">
-                        <InputText value={`${rates.player2[label === '成功率' ? 'successRate' : 'failRate']}%`} className="score-input rate-input" readOnly />
+                        <InputText value={`${rates.player2[label === '成功率' ? 'successRate' : 'failRate']}%`} className="score-input rate-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
                     </div>
                 </div>
             </div>

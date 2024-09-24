@@ -75,26 +75,26 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({ team, data, onDataChange }) => 
             <div className="score-row">
                 <div className="player-score">
                     <Button icon="pi pi-minus" onClick={() => decrementScore('player1', category, true)} className="p-button-secondary score-button" />
-                    <InputText value={data.scores.player1[category].success.toString()} className="score-input" readOnly />
+                    <InputText value={data.scores.player1[category].success.toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
                     <Button icon="pi pi-plus" onClick={() => incrementScore('player1', category, true)} className="p-button-secondary score-button" />
                 </div>
                 <div className="success-label">O</div>
                 <div className="player-score">
                     <Button icon="pi pi-minus" onClick={() => decrementScore('player2', category, true)} className="p-button-secondary score-button" />
-                    <InputText value={data.scores.player2[category].success.toString()} className="score-input" readOnly />
+                    <InputText value={data.scores.player2[category].success.toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
                     <Button icon="pi pi-plus" onClick={() => incrementScore('player2', category, true)} className="p-button-secondary score-button" />
                 </div>
             </div>
             <div className="score-row">
                 <div className="player-score">
                     <Button icon="pi pi-minus" onClick={() => decrementScore('player1', category, false)} className="p-button-secondary score-button" />
-                    <InputText value={data.scores.player1[category].fail.toString()} className="score-input" readOnly />
+                    <InputText value={data.scores.player1[category].fail.toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
                     <Button icon="pi pi-plus" onClick={() => incrementScore('player1', category, false)} className="p-button-secondary score-button" />
                 </div>
                 <div className="fail-label">X</div>
                 <div className="player-score">
                     <Button icon="pi pi-minus" onClick={() => decrementScore('player2', category, false)} className="p-button-secondary score-button" />
-                    <InputText value={data.scores.player2[category].fail.toString()} className="score-input" readOnly />
+                    <InputText value={data.scores.player2[category].fail.toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
                     <Button icon="pi pi-plus" onClick={() => incrementScore('player2', category, false)} className="p-button-secondary score-button" />
                 </div>
             </div>
@@ -120,7 +120,7 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({ team, data, onDataChange }) => 
             <div className="special-row">
                 <div className="player-score">
                     <Button icon="pi pi-minus" onClick={() => decrementScore('player1', category, true)} className="p-button-secondary score-button" />
-                    <InputText value={data.scores.player1[category].toString()} className="score-input" readOnly />
+                    <InputText value={data.scores.player1[category].toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
                     <Button icon="pi pi-plus" onClick={() => incrementScore('player1', category, true)} className="p-button-secondary score-button" />
                 </div>
                 <div className="category-label" style={{ whiteSpace: 'pre-wrap' }}>
@@ -128,7 +128,7 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({ team, data, onDataChange }) => 
                 </div>
                 <div className="player-score">
                     <Button icon="pi pi-minus" onClick={() => decrementScore('player2', category, true)} className="p-button-secondary score-button" />
-                    <InputText value={data.scores.player2[category].toString()} className="score-input" readOnly />
+                    <InputText value={data.scores.player2[category].toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
                     <Button icon="pi pi-plus" onClick={() => incrementScore('player2', category, true)} className="p-button-secondary score-button" />
                 </div>
             </div>
