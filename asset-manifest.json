@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/player-scoreboard/static/css/main.b8c4c148.css",
-    "main.js": "/player-scoreboard/static/js/main.b5b980e0.js",
+    "main.css": "/player-scoreboard/static/css/main.99a6c04f.css",
+    "main.js": "/player-scoreboard/static/js/main.424f6ba9.js",
     "static/js/453.2f385f7b.chunk.js": "/player-scoreboard/static/js/453.2f385f7b.chunk.js",
     "static/media/primeicons.svg": "/player-scoreboard/static/media/primeicons.6ed59f962963a4a73af2.svg",
     "static/media/primeicons.eot": "/player-scoreboard/static/media/primeicons.ff0c4cd79b2ffca2de54.eot",
@@ -9,12 +9,12 @@
     "static/media/primeicons.ttf": "/player-scoreboard/static/media/primeicons.a5c2a53d1ff7a9ff5933.ttf",
     "static/media/primeicons.woff2": "/player-scoreboard/static/media/primeicons.024b32cc7bf399b1a847.woff2",
     "index.html": "/player-scoreboard/index.html",
-    "main.b8c4c148.css.map": "/player-scoreboard/static/css/main.b8c4c148.css.map",
-    "main.b5b980e0.js.map": "/player-scoreboard/static/js/main.b5b980e0.js.map",
+    "main.99a6c04f.css.map": "/player-scoreboard/static/css/main.99a6c04f.css.map",
+    "main.424f6ba9.js.map": "/player-scoreboard/static/js/main.424f6ba9.js.map",
     "453.2f385f7b.chunk.js.map": "/player-scoreboard/static/js/453.2f385f7b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b8c4c148.css",
-    "static/js/main.b5b980e0.js"
+    "static/css/main.99a6c04f.css",
+    "static/js/main.424f6ba9.js"
   ]
 }
