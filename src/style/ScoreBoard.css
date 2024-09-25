@@ -156,10 +156,6 @@
     background-color: #FFE0FF;
 }
 
-.scoreboard-container .special {
-    background-color: #F0F0F0;
-}
-
 .game-info-container .game-info-row:last-child {
     margin-bottom: 10px;
     padding-bottom: 8px;

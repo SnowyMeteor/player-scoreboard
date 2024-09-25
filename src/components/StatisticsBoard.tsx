@@ -1,5 +1,6 @@
 import React from 'react';
 import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
 import { useSwipeable } from 'react-swipeable';
 import '../style/StatisticsBoard.css';
 
@@ -133,20 +134,28 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
                 <div className="category-label">{label}</div>
                 <div className="score-row">
                     <div className="player-score">
+                        <Button icon="pi pi-minus" className="p-button-secondary score-button hidden-button" disabled />
                         <InputText value={player1Scores[category].success.toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
+                        <Button icon="pi pi-plus" className="p-button-secondary score-button hidden-button" disabled />
                     </div>
                     <div className="success-label">O</div>
                     <div className="player-score">
+                        <Button icon="pi pi-minus" className="p-button-secondary score-button hidden-button" disabled />
                         <InputText value={player2Scores[category].success.toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
+                        <Button icon="pi pi-plus" className="p-button-secondary score-button hidden-button" disabled />
                     </div>
                 </div>
                 <div className="score-row">
                     <div className="player-score">
+                        <Button icon="pi pi-minus" className="p-button-secondary score-button hidden-button" disabled />
                         <InputText value={player1Scores[category].fail.toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
+                        <Button icon="pi pi-plus" className="p-button-secondary score-button hidden-button" disabled />
                     </div>
                     <div className="fail-label">X</div>
                     <div className="player-score">
+                        <Button icon="pi pi-minus" className="p-button-secondary score-button hidden-button" disabled />
                         <InputText value={player2Scores[category].fail.toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
+                        <Button icon="pi pi-plus" className="p-button-secondary score-button hidden-button" disabled />
                     </div>
                 </div>
             </div>
@@ -161,13 +170,17 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
             <div className="statistics-section special">
                 <div className="special-row">
                     <div className="player-score">
+                        <Button icon="pi pi-minus" className="p-button-secondary score-button hidden-button" disabled />
                         <InputText value={player1Scores[category].toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
+                        <Button icon="pi pi-plus" className="p-button-secondary score-button hidden-button" disabled />
                     </div>
                     <div className="category-label" style={{ whiteSpace: 'pre-wrap' }}>
                         {breakAfterSecondCharacter(label)}
                     </div>
                     <div className="player-score">
+                        <Button icon="pi pi-minus" className="p-button-secondary score-button hidden-button" disabled />
                         <InputText value={player2Scores[category].toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
+                        <Button icon="pi pi-plus" className="p-button-secondary score-button hidden-button" disabled />
                     </div>
                 </div>
             </div>
