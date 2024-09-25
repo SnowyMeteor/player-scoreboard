@@ -21,13 +21,8 @@
     border-radius: 5px;
 }
 
-.scoreboard-container .team-header.our {
-    background-color: #87CEEB;
-}
-
-.scoreboard-container .team-header.enemy {
-    background-color: #FF6347;
-}
+.scoreboard-container .team-header.our { background-color: #87CEEB; }
+.scoreboard-container .team-header.enemy { background-color: #FF6347; }
 
 .scoreboard-container .team-label {
     font-size: 16px;
@@ -40,9 +35,7 @@
     height: 35px;
 }
 
-.scoreboard-container .player-spacer {
-    width: 10%;
-}
+.scoreboard-container .player-spacer { width: 10%; }
 
 .scoreboard-container .player-name-input {
     width: 100%;
@@ -54,9 +47,7 @@
     padding: 0.25rem !important;
 }
 
-.scoreboard-container .player-name-input::placeholder {
-    text-align: center !important;
-}
+.scoreboard-container .player-name-input::placeholder { text-align: center !important; }
 
 .scoreboard-container .score-section {
     width: 100%;
@@ -136,25 +127,11 @@
     border-color: #adb5bd;
 }
 
-.scoreboard-container .attack {
-    background-color: #FFE0E0;
-}
-
-.scoreboard-container .defense {
-    background-color: #E0FFE0;
-}
-
-.scoreboard-container .midfield {
-    background-color: #E0E0FF;
-}
-
-.scoreboard-container .chance {
-    background-color: #FFFFE0;
-}
-
-.scoreboard-container .smash {
-    background-color: #FFE0FF;
-}
+.scoreboard-container .attack { background-color: #FFE0E0; }
+.scoreboard-container .defense { background-color: #E0FFE0; }
+.scoreboard-container .midfield { background-color: #E0E0FF; }
+.scoreboard-container .chance { background-color: #FFFFE0; }
+.scoreboard-container .smash { background-color: #FFE0FF; }
 
 .game-info-container .game-info-row:last-child {
     margin-bottom: 10px;
