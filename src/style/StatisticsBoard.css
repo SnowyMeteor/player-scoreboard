@@ -115,7 +115,7 @@
 }
 
 .statistics-board-container .score-input {
-    font-size: 18px;
+    font-size: 18p;
     width: 40px !important;
     text-align: center !important;
     background-color: #FFFFFF !important;
@@ -194,14 +194,9 @@
     min-height: 90px;
     border: 0.5px solid #dcdcdc;
     border-radius: 5px;
-    padding: 8px;
+    padding: 8px !important;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     resize: vertical;
     box-sizing: border-box;
-    text-align: left;
-}
-
-.statistics-board-container .note-item .input-textarea::placeholder {
-    color: #999999;
-    text-align: left;
+    text-align: left !important;
 }
