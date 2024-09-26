@@ -58,7 +58,7 @@
 
 .scoreboard-container .category-label {
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 18px;
     text-align: center;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -82,7 +82,7 @@
 .scoreboard-container .success-label,
 .scoreboard-container .fail-label {
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 18px;
 }
 
 .scoreboard-container .special-row .category-label {
@@ -103,6 +103,7 @@
 }
 
 .scoreboard-container .score-input {
+    font-size: 18px;
     width: 40px !important;
     text-align: center !important;
     background-color: #FFFFFF !important;
@@ -127,11 +128,12 @@
     border-color: #adb5bd;
 }
 
-.scoreboard-container .attack { background-color: #FFE0E0; }
-.scoreboard-container .defense { background-color: #E0FFE0; }
-.scoreboard-container .midfield { background-color: #E0E0FF; }
-.scoreboard-container .chance { background-color: #FFFFE0; }
-.scoreboard-container .smash { background-color: #FFE0FF; }
+.scoreboard-container .attack { background-color: #C5CCD7; }
+.scoreboard-container .defense { background-color: #C5CCD7; }
+.scoreboard-container .midfield { background-color: #C5CCD7; }
+.scoreboard-container .chance { background-color: #C5CCD7; }
+.scoreboard-container .smash { background-color: #C5CCD7; }
+.scoreboard-container .special { background-color: #EDF0F5; }
 
 .game-info-container .game-info-row:last-child {
     margin-bottom: 10px;

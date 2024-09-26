@@ -5,9 +5,10 @@ import '../style/Notes.css';
 interface NotesProps {
     value: string;
     onChange: (value: string) => void;
+    readOnly?: boolean;
 }
 
-const Notes: React.FC<NotesProps> = ({ value, onChange }) => {
+const Notes: React.FC<NotesProps> = ({ value, onChange, readOnly = false }) => {
     return (
         <div className="note-container">
             <div className="note-item">
@@ -17,9 +18,10 @@ const Notes: React.FC<NotesProps> = ({ value, onChange }) => {
                     rows={5}
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
-                    placeholder="輸入註記..."
+                    placeholder={readOnly ? "" : "輸入註記..."}
                     autoResize
                     className="input-textarea text-left"
+                    readOnly={readOnly}
                 />
             </div>
         </div>

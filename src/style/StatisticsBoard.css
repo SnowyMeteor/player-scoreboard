@@ -24,8 +24,13 @@
     font-weight: bold;
 }
 
-.statistics-board-container .team-header.our { background-color: #87CEEB; }
-.statistics-board-container .team-header.enemy { background-color: #FF6347; }
+.statistics-board-container .team-header.our {
+    background-color: #87CEEB;
+}
+
+.statistics-board-container .team-header.enemy {
+    background-color: #FF6347;
+}
 
 .statistics-board-container .team-label {
     font-size: 16px;
@@ -38,7 +43,9 @@
     height: 30px;
 }
 
-.statistics-board-container .player-spacer { width: 10%; }
+.statistics-board-container .player-spacer {
+    width: 10%;
+}
 
 .statistics-board-container .player-name-input {
     width: 100%;
@@ -50,7 +57,9 @@
     padding: 0.25rem !important;
 }
 
-.statistics-board-container .player-name-input::placeholder { text-align: center !important; }
+.statistics-board-container .player-name-input::placeholder {
+    text-align: center !important;
+}
 
 .statistics-board-container .statistics-section {
     width: 100%;
@@ -61,7 +70,7 @@
 
 .statistics-board-container .category-label {
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 18px;
     text-align: center;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -85,7 +94,7 @@
 .statistics-board-container .success-label,
 .statistics-board-container .fail-label {
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 18px;
 }
 
 .statistics-board-container .special-row .category-label {
@@ -106,6 +115,7 @@
 }
 
 .statistics-board-container .score-input {
+    font-size: 18px;
     width: 40px !important;
     text-align: center !important;
     background-color: #FFFFFF !important;
@@ -126,17 +136,72 @@
     text-align: center !important;
 }
 
-.statistics-board-container .attack { background-color: #FFE0E0; }
-.statistics-board-container .defense { background-color: #E0FFE0; }
-.statistics-board-container .midfield { background-color: #E0E0FF; }
-.statistics-board-container .chance { background-color: #FFFFE0; }
-.statistics-board-container .smash { background-color: #FFE0FF; }
-
-.statistics-board-container .rate-input {
-    width: 60px;
+.statistics-board-container .attack {
+    background-color: #C5CCD7;
 }
 
-.game-info-container .game-info-row:last-child {
-    margin-bottom: 10px;
-    padding-bottom: 8px;
+.statistics-board-container .defense {
+    background-color: #C5CCD7;
+}
+
+.statistics-board-container .midfield {
+    background-color: #C5CCD7;
+}
+
+.statistics-board-container .chance {
+    background-color: #C5CCD7;
+}
+
+.statistics-board-container .smash {
+    background-color: #C5CCD7;
+}
+
+.statistics-board-container .special {
+    background-color: #EDF0F5;
+}
+
+.statistics-board-container .rate-input {
+    width: 80px !important;
+    background-color: #EDF0F5 !important;
+}
+
+.statistics-board-container .statistics-notes-container {
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-bottom: 20px;
+}
+
+.statistics-board-container .note-container {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.statistics-board-container .note-item {
+    width: 100%;
+}
+
+.statistics-board-container .note-item label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+.statistics-board-container .note-item .input-textarea {
+    width: 100%;
+    min-height: 90px;
+    border: 0.5px solid #dcdcdc;
+    border-radius: 5px;
+    padding: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    resize: vertical;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.statistics-board-container .note-item .input-textarea::placeholder {
+    color: #999999;
+    text-align: left;
 }

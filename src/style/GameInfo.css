@@ -102,3 +102,27 @@
     background-color: #8BC34A;
     border-color: #8BC34A;
 }
+
+.game-info-container .game-info-item label {
+    font-size: 18px;
+}
+
+.game-info-container #rounds+label {
+    font-size: 18px;
+}
+
+.game-info-container .game-info-column-left label {
+    font-size: 18px;
+}
+
+.game-info-container .game-info-column-right label {
+    font-size: 18px;
+}
+
+.game-info-container .p-button-statistics {
+    font-size: 16px;
+}
+
+.game-info-container .p-button-back-to-game {
+    font-size: 16px;
+}

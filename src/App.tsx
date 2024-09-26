@@ -6,9 +6,6 @@ import ScoreBoard from './components/ScoreBoard';
 import StatisticsBoard from './components/StatisticsBoard';
 import Notes from './components/Notes';
 
-type Category = 'attack' | 'defense' | 'midfield' | 'chance' | 'smash';
-type SpecialCategory = 'firstServeRate' | 'receiveErrorRate' | 'servePoints' | 'doubleFaults';
-
 interface CategoryScores {
   success: number;
   fail: number;
@@ -69,7 +66,6 @@ function App() {
   const [currentTeam, setCurrentTeam] = useState<'our' | 'enemy'>('our');
 
   useEffect(() => {
-    // 初始化第一局的數據
     setRoundsData([{
       ourTeam: { player1: '', player2: '', scores: JSON.parse(JSON.stringify(initialTeamScores)) },
       enemyTeam: { player1: '', player2: '', scores: JSON.parse(JSON.stringify(initialTeamScores)) },
@@ -114,13 +110,11 @@ function App() {
     setRoundsData(prev => {
       const newData = prev.map((round, index) => {
         if (index === currentRound - 1) {
-          // 更新當前回合的所有數據
           return {
             ...round,
             [team]: data
           };
         } else {
-          // 只更新其他回合的選手名稱
           return {
             ...round,
             [team]: {
@@ -184,6 +178,7 @@ function App() {
             }}
             currentTeam={currentTeam}
             onSwipe={setCurrentTeam}
+            roundsData={roundsData}
           />
         </div>
       ) : (

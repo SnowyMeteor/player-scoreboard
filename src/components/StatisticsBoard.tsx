@@ -2,6 +2,7 @@ import React from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { useSwipeable } from 'react-swipeable';
+import Notes from './Notes';
 import '../style/StatisticsBoard.css';
 
 type Category = 'attack' | 'defense' | 'midfield' | 'chance' | 'smash';
@@ -52,9 +53,10 @@ interface StatisticsBoardProps {
     enemyTeam: TeamProps;
     currentTeam: 'our' | 'enemy';
     onSwipe: (team: 'our' | 'enemy') => void;
+    roundsData: RoundData[];
 }
 
-const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, currentTeam, onSwipe }) => {
+const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, currentTeam, onSwipe, roundsData }) => {
     const calculatePlayerTotalScores = (teamProps: TeamProps, playerKey: 'player1' | 'player2'): PlayerScores => {
         const initialScores: PlayerScores = {
             attack: { success: 0, fail: 0 },
@@ -194,13 +196,23 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
             <div className="statistics-section special">
                 <div className="special-row">
                     <div className="player-score">
-                        <InputText value={`${rates.player1[label === '成功率' ? 'successRate' : 'failRate']}%`} className="score-input rate-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
+                        <InputText
+                            value={`${rates.player1[label === '成功率' ? 'successRate' : 'failRate']}%`}
+                            className="score-input rate-input"
+                            readOnly
+                            style={{ backgroundColor: '#EDF0F5' }}
+                        />
                     </div>
                     <div className="category-label" style={{ whiteSpace: 'pre-wrap' }}>
                         {label}
                     </div>
                     <div className="player-score">
-                        <InputText value={`${rates.player2[label === '成功率' ? 'successRate' : 'failRate']}%`} className="score-input rate-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
+                        <InputText
+                            value={`${rates.player2[label === '成功率' ? 'successRate' : 'failRate']}%`}
+                            className="score-input rate-input"
+                            readOnly
+                            style={{ backgroundColor: '#EDF0F5' }}
+                        />
                     </div>
                 </div>
             </div>
@@ -233,6 +245,13 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
                 {renderSpecialSection('doubleFaults', '雙發失誤', teamProps)}
                 {renderRateSection('成功率', teamProps)}
                 {renderRateSection('失敗率', teamProps)}
+                <Notes
+                    value={roundsData.map((round, index) =>
+                        `第 ${index + 1} 局：\n${round.notes}`
+                    ).join('\n\n')}
+                    onChange={() => { }}
+                    readOnly={true}
+                />
             </div>
         );
     };
