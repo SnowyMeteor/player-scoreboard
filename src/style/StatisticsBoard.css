@@ -183,6 +183,7 @@
 }
 
 .statistics-board-container .note-item label {
+    font-size: 18px;
     display: block;
     font-weight: bold;
     margin-bottom: 0.5rem;
