@@ -1,9 +1,11 @@
+/* Main container styles */
 .game-info-container {
     padding-top: 30px;
     padding-left: 10%;
     padding-right: 10%;
 }
 
+/* Layout styles */
 .game-info-container .game-info-item {
     margin-bottom: 0.7rem;
 }
@@ -24,6 +26,7 @@
     margin-right: 4%;
 }
 
+/* Input and dropdown styles */
 .game-info-container .p-dropdown,
 .game-info-container .p-inputtext {
     height: 38px;
@@ -48,16 +51,28 @@
     text-align: left !important;
 }
 
+/* Label styles */
+.game-info-container .game-info-item label,
+.game-info-container #rounds+label,
+.game-info-container .game-info-column-left label,
+.game-info-container .game-info-column-right label {
+    font-size: 18px;
+}
+
+/* Round option styles */
 .game-info-container .rounds-option {
     color: #4682B4;
 }
 
-.game-info-container .p-button.p-button-info {
+/* Button styles */
+.game-info-container .p-button.p-button-info,
+.game-info-container .p-button.p-button-secondary {
     background-color: #3498db;
     border-color: #3498db;
 }
 
-.game-info-container .p-button.p-button-info:hover {
+.game-info-container .p-button.p-button-info:hover,
+.game-info-container .p-button.p-button-secondary:hover {
     background-color: #2980b9;
     border-color: #2980b9;
 }
@@ -70,20 +85,4 @@
 .game-info-container .p-button.p-button-secondary:hover {
     background-color: #7f8c8d;
     border-color: #7f8c8d;
-}
-
-.game-info-container .game-info-item label {
-    font-size: 18px;
-}
-
-.game-info-container #rounds+label {
-    font-size: 18px;
-}
-
-.game-info-container .game-info-column-left label {
-    font-size: 18px;
-}
-
-.game-info-container .game-info-column-right label {
-    font-size: 18px;
 }

@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
-import { Button } from 'primereact/button';
 import '../style/GameInfo.css';
 
+// Options for rounds and win/loss dropdown
 const roundsOptions = Array.from({ length: 10 }, (_, i) => ({ label: `${i + 1}`, value: i + 1 }));
 const winLossOptions = [
     { label: '勝', value: 'win' },
@@ -22,12 +22,14 @@ const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange, curren
     const [result, setResult] = useState<string | null>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
+    // Set initial cursor position for score input
     useEffect(() => {
         if (inputRef.current) {
             inputRef.current.setSelectionRange(0, 0);
         }
     }, []);
 
+    // Handle score input change and formatting
     const handleScoreChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.replace(/[^0-9]/g, '');
         let formattedValue = ':';
@@ -43,6 +45,7 @@ const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange, curren
 
         setScore(formattedValue);
 
+        // Set cursor position after state update
         setTimeout(() => {
             if (inputRef.current) {
                 const cursorPosition = value.length > 2 ? value.length + 1 : value.length;
@@ -53,7 +56,7 @@ const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange, curren
 
     return (
         <div className="p-fluid game-info-container">
-            {/* 比賽名稱 */}
+            {/* Game Name Input */}
             <div className="game-info-item">
                 <label htmlFor="gameName" className="block font-bold mb-2 text-left">比賽名稱</label>
                 <InputText
@@ -65,7 +68,7 @@ const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange, curren
                 />
             </div>
 
-            {/* 局數 */}
+            {/* Round Selection Dropdown */}
             <div className="game-info-item">
                 <label htmlFor="rounds" className="block font-bold mb-2 text-left">局數</label>
                 <Dropdown
@@ -81,9 +84,9 @@ const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange, curren
                 />
             </div>
 
-            {/* 勝負和比數 */}
+            {/* Win/Loss and Score Inputs */}
             <div className="game-info-row">
-                {/* 勝負 */}
+                {/* Win/Loss Dropdown */}
                 <div className="game-info-column game-info-column-left">
                     <label htmlFor="result" className="block font-bold mb-2 text-left">勝負</label>
                     <Dropdown
@@ -96,7 +99,7 @@ const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange, curren
                         optionLabel="label"
                     />
                 </div>
-                {/* 比數 */}
+                {/* Score Input */}
                 <div className="game-info-column game-info-column-right">
                     <label htmlFor="score" className="block font-bold mb-2 text-left">比數</label>
                     <InputText

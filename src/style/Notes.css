@@ -1,3 +1,4 @@
+/* Container for the notes component */
 .note-container {
     font-size: 18px;
     padding-left: 10%;
@@ -5,6 +6,7 @@
     margin-bottom: 20px;
 }
 
+/* Utility classes */
 .block {
     display: block;
 }
@@ -25,6 +27,7 @@
     width: 100%;
 }
 
+/* Textarea styles */
 .input-textarea {
     width: 100%;
     min-height: 90px;
@@ -38,6 +41,7 @@
     line-height: 1.5;
 }
 
+/* Placeholder styles */
 .input-textarea::placeholder {
     color: #999999;
     text-align: left;

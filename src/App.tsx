@@ -7,6 +7,7 @@ import ScoreBoard from './components/ScoreBoard';
 import StatisticsBoard from './components/StatisticsBoard';
 import Notes from './components/Notes';
 
+// Interface definitions for scores
 interface CategoryScores {
   success: number;
   fail: number;
@@ -40,6 +41,7 @@ interface TeamData {
   scores: TeamScores;
 }
 
+// Initial score setup
 const initialCategoryScores: CategoryScores = { success: 0, fail: 0 };
 
 const initialPlayerScores: PlayerScores = {
@@ -67,7 +69,7 @@ function App() {
   const [currentTeam, setCurrentTeam] = useState<'our' | 'enemy'>('our');
   const [currentPage, setCurrentPage] = useState<'game' | 'statistics'>('game');
 
-
+  // Initialize rounds data
   useEffect(() => {
     setRoundsData([{
       ourTeam: { player1: '', player2: '', scores: JSON.parse(JSON.stringify(initialTeamScores)) },
@@ -76,6 +78,7 @@ function App() {
     }]);
   }, []);
 
+  // Handle round change
   const handleRoundChange = useCallback((round: number) => {
     setCurrentRound(round);
     setRoundsData(prev => {
@@ -103,6 +106,7 @@ function App() {
     });
   }, []);
 
+  // Update team data
   const updateTeamData = useCallback((team: 'ourTeam' | 'enemyTeam', data: TeamData) => {
     setRoundsData(prev => {
       const newData = prev.map((round, index) => {
@@ -127,6 +131,7 @@ function App() {
     });
   }, [currentRound]);
 
+  // Update notes
   const updateNotes = useCallback((notes: string) => {
     setRoundsData(prev => {
       const newData = [...prev];
@@ -142,16 +147,19 @@ function App() {
     });
   }, [currentRound]);
 
+  // Show statistics
   const handleShowStatistics = useCallback(() => {
     setShowStatistics(true);
     setCurrentPage('statistics');
   }, []);
 
+  // Back to game
   const handleBackToGame = useCallback(() => {
     setShowStatistics(false);
     setCurrentPage('game');
   }, []);
 
+  // Swipe handlers
   const handlers = useSwipeable({
     onSwipedLeft: () => setIndex(Math.min(index + 1, 1)),
     onSwipedRight: () => setIndex(Math.max(index - 1, 0)),

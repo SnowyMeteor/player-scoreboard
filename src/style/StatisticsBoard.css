@@ -1,3 +1,4 @@
+/* Main container styles */
 .statistics-board-container {
     display: flex;
     flex-direction: column;
@@ -6,13 +7,7 @@
     width: 100%;
 }
 
-.statistics-board-container .players-header {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 0.5rem;
-}
-
+/* Header styles */
 .statistics-board-container .team-header {
     width: 100%;
     text-align: center;
@@ -38,6 +33,14 @@
     color: #FFFFFF;
 }
 
+/* Player input styles */
+.statistics-board-container .players-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
 .statistics-board-container .player-input {
     width: 45%;
     height: 30px;
@@ -61,6 +64,7 @@
     text-align: center !important;
 }
 
+/* Statistics section styles */
 .statistics-board-container .statistics-section {
     width: 100%;
     margin-bottom: 0.7rem;
@@ -72,14 +76,7 @@
     font-weight: bold;
     font-size: 18px;
     text-align: center;
-    margin-top: 0.4rem;
-    margin-bottom: 0.4rem;
-}
-
-.statistics-board-container .score-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
 
@@ -87,6 +84,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.statistics-board-container .score-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
 }
 
 .statistics-board-container .player-score {
@@ -102,6 +106,7 @@
     font-size: 18px;
 }
 
+/* Special row styles */
 .statistics-board-container .special-row .category-label {
     flex: 1;
     text-align: center;
@@ -118,6 +123,7 @@
     align-items: center;
 }
 
+/* Input styles */
 .statistics-board-container .score-input {
     font-size: 18px;
     width: 40px !important;
@@ -127,20 +133,15 @@
     height: 2rem !important;
 }
 
-.statistics-board-container .score-button,
-.statistics-board-container .hidden-button {
-    width: 2rem !important;
-    height: 2rem !important;
-    margin: 0 5px;
-    visibility: hidden;
-}
-
 .statistics-board-container .p-inputtext {
     padding-left: 0px !important;
     text-align: center !important;
 }
 
-.statistics-board-container.our .special {
+/* Team-specific background colors */
+.statistics-board-container.our .special,
+.statistics-board-container.our .rate-section,
+.statistics-board-container.our .rate-input {
     background-color: #FFE4E1;
 }
 
@@ -148,12 +149,13 @@
 .statistics-board-container.our .defense,
 .statistics-board-container.our .midfield,
 .statistics-board-container.our .chance,
-.statistics-board-container.our .smash,
-.statistics-board-container.our .rate-input {
-    background-color: #FFCCCB !important;
+.statistics-board-container.our .smash {
+    background-color: #FFCCCB;
 }
 
-.statistics-board-container.enemy .special {
+.statistics-board-container.enemy .special,
+.statistics-board-container.enemy .rate-section,
+.statistics-board-container.enemy .rate-input {
     background-color: #E6F3FF;
 }
 
@@ -161,52 +163,11 @@
 .statistics-board-container.enemy .defense,
 .statistics-board-container.enemy .midfield,
 .statistics-board-container.enemy .chance,
-.statistics-board-container.enemy .smash,
-.statistics-board-container.enemy .rate-input {
+.statistics-board-container.enemy .smash {
     background-color: #ADD8E6;
 }
 
-.statistics-board-container .rate-input {
-    width: 80px !important;
-}
-
-.statistics-board-container .statistics-notes-container {
-    width: 100%;
-    padding-left: 10%;
-    padding-right: 10%;
-    margin-bottom: 20px;
-}
-
-.statistics-board-container .note-container {
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-.statistics-board-container .note-item {
-    width: 100%;
-}
-
-.statistics-board-container .note-item label {
-    font-size: 18px;
-    display: block;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    text-align: left;
-}
-
-.statistics-board-container .note-item .input-textarea {
-    width: 100%;
-    min-height: 90px;
-    border: 0.5px solid #dcdcdc;
-    border-radius: 5px;
-    padding: 8px !important;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    resize: vertical;
-    box-sizing: border-box;
-    text-align: left !important;
-}
-
+/* Rate section styles */
 .statistics-board-container .rate-section {
     width: 100%;
     margin-bottom: 0.7rem;
@@ -244,10 +205,40 @@
     height: 2rem !important;
 }
 
-.statistics-board-container.our .rate-section {
-    background-color: #FFCCCB;
+/* Notes styles */
+.statistics-board-container .statistics-notes-container {
+    width: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-bottom: 20px;
 }
 
-.statistics-board-container.enemy .rate-section {
-    background-color: #ADD8E6;
+.statistics-board-container .note-container {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.statistics-board-container .note-item {
+    width: 100%;
+}
+
+.statistics-board-container .note-item label {
+    font-size: 18px;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+.statistics-board-container .note-item .input-textarea {
+    width: 100%;
+    min-height: 90px;
+    border: 0.5px solid #dcdcdc;
+    border-radius: 5px;
+    padding: 8px !important;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    resize: vertical;
+    box-sizing: border-box;
+    text-align: left !important;
 }

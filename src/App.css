@@ -1,7 +1,9 @@
+/* Main app styles */
 .App {
   text-align: center;
 }
 
+/* Logo styles */
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -13,6 +15,7 @@
   }
 }
 
+/* Header styles */
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -24,19 +27,23 @@
   color: white;
 }
 
+/* Link styles */
 .App-link {
-  color: #61dafb;
+  color: #FFFFFF;
 }
 
+/* Animation keyframes */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
+/* Button container styles */
 .button-container {
   display: flex;
   justify-content: space-between;
@@ -46,6 +53,7 @@
   margin-bottom: 2rem;
 }
 
+/* Button styles */
 .button-container .p-button {
   height: 45px;
   display: flex;

@@ -1,13 +1,13 @@
 import React from 'react';
 import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
 import { useSwipeable } from 'react-swipeable';
-import Notes from './Notes';
 import '../style/StatisticsBoard.css';
 
+// Type definitions
 type Category = 'attack' | 'defense' | 'midfield' | 'chance' | 'smash';
 type SpecialCategory = 'firstServeRate' | 'receiveErrorRate' | 'servePoints' | 'doubleFaults';
 
+// Interface definitions
 interface CategoryScores {
     success: number;
     fail: number;
@@ -57,6 +57,7 @@ interface StatisticsBoardProps {
 }
 
 const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, currentTeam, onSwipe, roundsData }) => {
+    // Calculate total scores for a player
     const calculatePlayerTotalScores = (teamProps: TeamProps, playerKey: 'player1' | 'player2'): PlayerScores => {
         const initialScores: PlayerScores = {
             attack: { success: 0, fail: 0 },
@@ -87,6 +88,7 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
         }, { ...initialScores });
     };
 
+    // Calculate success and fail rates for a team
     const calculateSuccessFailRates = (teamProps: TeamProps) => {
         const player1Scores = calculatePlayerTotalScores(teamProps, 'player1');
         const player2Scores = calculatePlayerTotalScores(teamProps, 'player2');
@@ -113,6 +115,7 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
         };
     };
 
+    // Break text after second character for display
     const breakAfterSecondCharacter = (text: string) => {
         if (text.length > 2) {
             return (
@@ -127,6 +130,7 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
         }
     };
 
+    // Render statistics section for regular categories
     const renderStatisticsSection = (category: Category, label: string, teamProps: TeamProps) => {
         const player1Scores = calculatePlayerTotalScores(teamProps, 'player1');
         const player2Scores = calculatePlayerTotalScores(teamProps, 'player2');
@@ -136,34 +140,27 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
                 <div className="category-label">{label}</div>
                 <div className="score-row">
                     <div className="player-score">
-                        <Button icon="pi pi-minus" className="p-button-secondary score-button hidden-button" disabled />
                         <InputText value={player1Scores[category].success.toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
-                        <Button icon="pi pi-plus" className="p-button-secondary score-button hidden-button" disabled />
                     </div>
                     <div className="success-label">O</div>
                     <div className="player-score">
-                        <Button icon="pi pi-minus" className="p-button-secondary score-button hidden-button" disabled />
                         <InputText value={player2Scores[category].success.toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
-                        <Button icon="pi pi-plus" className="p-button-secondary score-button hidden-button" disabled />
                     </div>
                 </div>
                 <div className="score-row">
                     <div className="player-score">
-                        <Button icon="pi pi-minus" className="p-button-secondary score-button hidden-button" disabled />
                         <InputText value={player1Scores[category].fail.toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
-                        <Button icon="pi pi-plus" className="p-button-secondary score-button hidden-button" disabled />
                     </div>
                     <div className="fail-label">X</div>
                     <div className="player-score">
-                        <Button icon="pi pi-minus" className="p-button-secondary score-button hidden-button" disabled />
                         <InputText value={player2Scores[category].fail.toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
-                        <Button icon="pi pi-plus" className="p-button-secondary score-button hidden-button" disabled />
                     </div>
                 </div>
             </div>
         );
     };
 
+    // Render statistics section for special categories
     const renderSpecialSection = (category: SpecialCategory, label: string, teamProps: TeamProps) => {
         const player1Scores = calculatePlayerTotalScores(teamProps, 'player1');
         const player2Scores = calculatePlayerTotalScores(teamProps, 'player2');
@@ -172,23 +169,20 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
             <div className="statistics-section special">
                 <div className="special-row">
                     <div className="player-score">
-                        <Button icon="pi pi-minus" className="p-button-secondary score-button hidden-button" disabled />
                         <InputText value={player1Scores[category].toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
-                        <Button icon="pi pi-plus" className="p-button-secondary score-button hidden-button" disabled />
                     </div>
                     <div className="category-label" style={{ whiteSpace: 'pre-wrap' }}>
                         {breakAfterSecondCharacter(label)}
                     </div>
                     <div className="player-score">
-                        <Button icon="pi pi-minus" className="p-button-secondary score-button hidden-button" disabled />
                         <InputText value={player2Scores[category].toString()} className="score-input" readOnly style={{ backgroundColor: '#FFFFFF' }} />
-                        <Button icon="pi pi-plus" className="p-button-secondary score-button hidden-button" disabled />
                     </div>
                 </div>
             </div>
         );
     };
 
+    // Render rate section (success rate and fail rate)
     const renderRateSection = (label: string, teamProps: TeamProps) => {
         const rates = calculateSuccessFailRates(teamProps);
 
@@ -217,6 +211,7 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
         );
     };
 
+    // Render team statistics
     const renderTeamStatistics = (teamProps: TeamProps) => {
         return (
             <div className={`statistics-board-container ${teamProps.team}`}>
@@ -247,6 +242,7 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
         );
     };
 
+    // Set up swipe handlers
     const handlers = useSwipeable({
         onSwipedLeft: () => onSwipe('enemy'),
         onSwipedRight: () => onSwipe('our'),
