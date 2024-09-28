@@ -69,16 +69,21 @@
     font-weight: bold;
     font-size: 18px;
     text-align: center;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
 }
 
-.scoreboard-container .score-row,
-.scoreboard-container .special-row {
+.scoreboard-container .score-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.5rem;
+}
+
+.scoreboard-container .special-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .scoreboard-container .player-score {
@@ -97,11 +102,10 @@
 .scoreboard-container .special-row .category-label {
     flex: 1;
     text-align: center;
-    margin: 0 10px;
     font-size: 1rem;
     font-weight: bold;
     white-space: pre-wrap;
-    line-height: 1.2;
+    line-height: 1.3;
 }
 
 .scoreboard-container .special-row .player-score {

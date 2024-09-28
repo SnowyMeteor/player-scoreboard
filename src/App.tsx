@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSwipeable } from 'react-swipeable';
+import { Button } from 'primereact/button';
 import './App.css';
 import GameInfo from './components/GameInfo';
 import ScoreBoard from './components/ScoreBoard';
@@ -74,12 +75,6 @@ function App() {
       notes: ''
     }]);
   }, []);
-
-  const handlers = useSwipeable({
-    onSwipedLeft: () => setIndex(Math.min(index + 1, 1)),
-    onSwipedRight: () => setIndex(Math.max(index - 1, 0)),
-    trackMouse: true
-  });
 
   const handleRoundChange = useCallback((round: number) => {
     setCurrentRound(round);
@@ -157,13 +152,17 @@ function App() {
     setCurrentPage('game');
   }, []);
 
+  const handlers = useSwipeable({
+    onSwipedLeft: () => setIndex(Math.min(index + 1, 1)),
+    onSwipedRight: () => setIndex(Math.max(index - 1, 0)),
+    trackMouse: true
+  });
+
   return (
     <div className="App">
       <GameInfo
         currentRound={currentRound}
         onRoundChange={handleRoundChange}
-        onShowStatistics={handleShowStatistics}
-        onBackToGame={handleBackToGame}
         currentPage={currentPage}
       />
       {showStatistics ? (
@@ -187,35 +186,48 @@ function App() {
           />
         </div>
       ) : (
-        <>
-          <div {...handlers} style={{ overflow: 'hidden' }}>
-            <div style={{
-              display: 'flex',
-              transition: 'transform 0.3s ease-out',
-              transform: `translateX(-${index * 100}%)`
-            }}>
-              <div className="scoreboard-wrapper" style={{ flex: '0 0 100%' }}>
-                <ScoreBoard
-                  team="our"
-                  data={roundsData[currentRound - 1]?.ourTeam || { player1: '', player2: '', scores: initialTeamScores }}
-                  onDataChange={(data) => updateTeamData('ourTeam', data)}
-                />
-              </div>
-              <div className="scoreboard-wrapper" style={{ flex: '0 0 100%' }}>
-                <ScoreBoard
-                  team="enemy"
-                  data={roundsData[currentRound - 1]?.enemyTeam || { player1: '', player2: '', scores: initialTeamScores }}
-                  onDataChange={(data) => updateTeamData('enemyTeam', data)}
-                />
-              </div>
+        <div {...handlers} style={{ overflow: 'hidden' }}>
+          <div style={{
+            display: 'flex',
+            transition: 'transform 0.3s ease-out',
+            transform: `translateX(-${index * 100}%)`
+          }}>
+            <div className="scoreboard-wrapper" style={{ flex: '0 0 100%' }}>
+              <ScoreBoard
+                team="our"
+                data={roundsData[currentRound - 1]?.ourTeam || { player1: '', player2: '', scores: initialTeamScores }}
+                onDataChange={(data) => updateTeamData('ourTeam', data)}
+              />
+            </div>
+            <div className="scoreboard-wrapper" style={{ flex: '0 0 100%' }}>
+              <ScoreBoard
+                team="enemy"
+                data={roundsData[currentRound - 1]?.enemyTeam || { player1: '', player2: '', scores: initialTeamScores }}
+                onDataChange={(data) => updateTeamData('enemyTeam', data)}
+              />
             </div>
           </div>
-          <Notes
-            value={roundsData[currentRound - 1]?.notes || ''}
-            onChange={updateNotes}
-          />
-        </>
+        </div>
       )}
+      <Notes
+        value={showStatistics
+          ? roundsData.map((round, index) => `第 ${index + 1} 局：\n${round.notes}`).join('\n\n')
+          : roundsData[currentRound - 1]?.notes || ''}
+        onChange={showStatistics ? () => { } : updateNotes}
+        readOnly={showStatistics}
+      />
+      <div className="button-container">
+        <Button
+          label="回到比賽"
+          className={`p-button-back-to-game ${currentPage === 'game' ? 'active' : 'inactive'}`}
+          onClick={handleBackToGame}
+        />
+        <Button
+          label="統計結果"
+          className={`p-button-statistics ${currentPage === 'statistics' ? 'active' : 'inactive'}`}
+          onClick={handleShowStatistics}
+        />
+      </div>
     </div>
   );
 }

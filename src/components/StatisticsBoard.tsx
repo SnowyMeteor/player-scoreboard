@@ -193,25 +193,23 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
         const rates = calculateSuccessFailRates(teamProps);
 
         return (
-            <div className="statistics-section special">
-                <div className="special-row">
-                    <div className="player-score">
+            <div className="statistics-section rate-section">
+                <div className="rate-row">
+                    <div className="player-rate">
                         <InputText
                             value={`${rates.player1[label === '成功率' ? 'successRate' : 'failRate']}%`}
-                            className="score-input rate-input"
+                            className="rate-input"
                             readOnly
-                            style={{ backgroundColor: '#EDF0F5' }}
                         />
                     </div>
-                    <div className="category-label" style={{ whiteSpace: 'pre-wrap' }}>
+                    <div className="rate-label">
                         {label}
                     </div>
-                    <div className="player-score">
+                    <div className="player-rate">
                         <InputText
                             value={`${rates.player2[label === '成功率' ? 'successRate' : 'failRate']}%`}
-                            className="score-input rate-input"
+                            className="rate-input"
                             readOnly
-                            style={{ backgroundColor: '#EDF0F5' }}
                         />
                     </div>
                 </div>
@@ -221,7 +219,7 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
 
     const renderTeamStatistics = (teamProps: TeamProps) => {
         return (
-            <div className="statistics-board-container">
+            <div className={`statistics-board-container ${teamProps.team}`}>
                 <div className={`team-header ${teamProps.team}`}>
                     <div className="team-label">{teamProps.team === 'our' ? '我方隊伍' : '敵方隊伍'}</div>
                 </div>
@@ -234,24 +232,17 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
                         <InputText value={teamProps.player2Name} className="player-name-input" readOnly />
                     </div>
                 </div>
+                {renderSpecialSection('firstServeRate', '一發進球', teamProps)}
+                {renderSpecialSection('receiveErrorRate', '接球失誤', teamProps)}
+                {renderSpecialSection('servePoints', '發球得分', teamProps)}
+                {renderSpecialSection('doubleFaults', '雙發失誤', teamProps)}
                 {renderStatisticsSection('attack', '進攻', teamProps)}
                 {renderStatisticsSection('defense', '防守', teamProps)}
                 {renderStatisticsSection('midfield', '中場處理', teamProps)}
                 {renderStatisticsSection('chance', '機會球', teamProps)}
                 {renderStatisticsSection('smash', '落地擊球', teamProps)}
-                {renderSpecialSection('firstServeRate', '一發進球率', teamProps)}
-                {renderSpecialSection('receiveErrorRate', '接球失誤率', teamProps)}
-                {renderSpecialSection('servePoints', '發球得分', teamProps)}
-                {renderSpecialSection('doubleFaults', '雙發失誤', teamProps)}
                 {renderRateSection('成功率', teamProps)}
                 {renderRateSection('失敗率', teamProps)}
-                <Notes
-                    value={roundsData.map((round, index) =>
-                        `第 ${index + 1} 局：\n${round.notes}`
-                    ).join('\n\n')}
-                    onChange={() => { }}
-                    readOnly={true}
-                />
             </div>
         );
     };

@@ -32,8 +32,10 @@
     border-radius: 5px;
     padding: 8px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    resize: vertical;
+    resize: none;
     box-sizing: border-box;
+    overflow: hidden;
+    line-height: 1.5;
 }
 
 .input-textarea::placeholder {

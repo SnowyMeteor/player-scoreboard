@@ -29,13 +29,6 @@
     height: 38px;
 }
 
-.game-info-container .p-button {
-    height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .game-info-container .p-inputtext {
     padding-left: 0px;
 }
@@ -79,49 +72,6 @@
     border-color: #7f8c8d;
 }
 
-.game-info-container .p-button.p-button-statistics {
-    background-color: #FFC466;
-    border-color: #FFC466;
-    color: #ffffff;
-    border-radius: 30px;
-}
-
-.game-info-container .p-button.p-button-statistics:hover {
-    background-color: #FFB74D;
-    border-color: #FFB74D;
-}
-
-.game-info-container .p-button.p-button-back-to-game {
-    background-color: #9CCC65;
-    border-color: #9CCC65;
-    color: #ffffff;
-    border-radius: 30px;
-}
-
-.game-info-container .p-button.p-button-back-to-game:hover {
-    background-color: #8BC34A;
-    border-color: #8BC34A;
-}
-
-.game-info-container .p-button.p-button-statistics.inactive,
-.game-info-container .p-button.p-button-back-to-game.inactive {
-    background-color: #FFFFFF;
-    color: #333333;
-}
-
-.game-info-container .p-button.p-button-statistics.inactive {
-    border-color: #FFC466;
-}
-
-.game-info-container .p-button.p-button-back-to-game.inactive {
-    border-color: #9CCC65;
-}
-
-.game-info-container .p-button.p-button-statistics.inactive:hover,
-.game-info-container .p-button.p-button-back-to-game.inactive:hover {
-    background-color: #f0f0f0;
-}
-
 .game-info-container .game-info-item label {
     font-size: 18px;
 }
@@ -136,12 +86,4 @@
 
 .game-info-container .game-info-column-right label {
     font-size: 18px;
-}
-
-.game-info-container .p-button-statistics {
-    font-size: 16px;
-}
-
-.game-info-container .p-button-back-to-game {
-    font-size: 16px;
 }

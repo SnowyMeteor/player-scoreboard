@@ -32,8 +32,60 @@
   from {
     transform: rotate(0deg);
   }
-
   to {
     transform: rotate(360deg);
   }
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-top: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.button-container .p-button {
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border-radius: 30px;
+  width: 48%;
+  background-color: #FFFFFF;
+  transition: all 0.3s ease;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.button-container .p-button-back-to-game {
+  border-color: #9CCC65;
+  color: #9CCC65;
+}
+
+.button-container .p-button-statistics {
+  border-color: #FFC466;
+  color: #FFC466;
+}
+
+.button-container .p-button-back-to-game.active {
+  background-color: #9CCC65;
+  color: #FFFFFF;
+}
+
+.button-container .p-button-statistics.active {
+  background-color: #FFC466;
+  color: #FFFFFF;
+}
+
+.button-container .p-button-back-to-game:hover {
+  background-color: #9CCC65;
+  color: #FFFFFF;
+}
+
+.button-container .p-button-statistics:hover {
+  background-color: #FFC466;
+  color: #FFFFFF;
 }

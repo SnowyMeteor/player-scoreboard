@@ -13,12 +13,10 @@ const winLossOptions = [
 interface GameInfoProps {
     currentRound: number;
     onRoundChange: (round: number) => void;
-    onShowStatistics: () => void;
-    onBackToGame: () => void;
     currentPage: 'game' | 'statistics';
 }
 
-const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange, onShowStatistics, onBackToGame, currentPage }) => {
+const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange, currentPage }) => {
     const [gameName, setGameName] = useState('');
     const [score, setScore] = useState('');
     const [result, setResult] = useState<string | null>(null);
@@ -108,24 +106,6 @@ const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange, onShow
                         value={score}
                         onChange={handleScoreChange}
                         className="w-full text-left game-info-score-input"
-                    />
-                </div>
-            </div>
-
-            {/* 統計結果、回到比賽按鈕 */}
-            <div className="game-info-row">
-                <div className="game-info-column game-info-column-left">
-                    <Button
-                        label="回到比賽"
-                        className={`p-button-back-to-game w-full ${currentPage === 'game' ? 'active' : 'inactive'}`}
-                        onClick={onBackToGame}
-                    />
-                </div>
-                <div className="game-info-column game-info-column-right">
-                    <Button
-                        label="統計結果"
-                        className={`p-button-statistics w-full ${currentPage === 'statistics' ? 'active' : 'inactive'}`}
-                        onClick={onShowStatistics}
                     />
                 </div>
             </div>
