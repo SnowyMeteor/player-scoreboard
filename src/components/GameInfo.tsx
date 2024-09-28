@@ -114,11 +114,12 @@ const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange, onShow
             {/* 統計結果、回到比賽按鈕 */}
             <div className="game-info-row">
                 <div className="game-info-column game-info-column-left">
-                    <Button label="統計結果" className="p-button-statistics w-full" onClick={onShowStatistics} />
-                </div>
-                <div className="game-info-column game-info-column-right">
                     <Button label="回到比賽" className="p-button-back-to-game w-full" onClick={onBackToGame} />
                 </div>
+                <div className="game-info-column game-info-column-right">
+                    <Button label="統計結果" className="p-button-statistics w-full" onClick={onShowStatistics} />
+                </div>
+
             </div>
         </div>
     );

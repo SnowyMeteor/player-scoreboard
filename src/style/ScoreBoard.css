@@ -21,8 +21,13 @@
     border-radius: 5px;
 }
 
-.scoreboard-container .team-header.our { background-color: #87CEEB; }
-.scoreboard-container .team-header.enemy { background-color: #FF6347; }
+.scoreboard-container .team-header.our {
+    background-color: #FF6347;
+}
+
+.scoreboard-container .team-header.enemy {
+    background-color: #87CEEB;
+}
 
 .scoreboard-container .team-label {
     font-size: 16px;
@@ -35,7 +40,9 @@
     height: 30px;
 }
 
-.scoreboard-container .player-spacer { width: 10%; }
+.scoreboard-container .player-spacer {
+    width: 10%;
+}
 
 .scoreboard-container .player-name-input {
     width: 100%;
@@ -47,7 +54,9 @@
     padding: 0.25rem !important;
 }
 
-.scoreboard-container .player-name-input::placeholder { text-align: center !important; }
+.scoreboard-container .player-name-input::placeholder {
+    text-align: center !important;
+}
 
 .scoreboard-container .score-section {
     width: 100%;
@@ -128,12 +137,30 @@
     border-color: #adb5bd;
 }
 
-.scoreboard-container .attack { background-color: #C5CCD7; }
-.scoreboard-container .defense { background-color: #C5CCD7; }
-.scoreboard-container .midfield { background-color: #C5CCD7; }
-.scoreboard-container .chance { background-color: #C5CCD7; }
-.scoreboard-container .smash { background-color: #C5CCD7; }
-.scoreboard-container .special { background-color: #EDF0F5; }
+.scoreboard-container.our .special {
+    background-color: #FFE4E1;
+}
+
+.scoreboard-container.our .attack,
+.scoreboard-container.our .defense,
+.scoreboard-container.our .midfield,
+.scoreboard-container.our .chance,
+.scoreboard-container.our .smash {
+    background-color: #FFCCCB;
+}
+
+.scoreboard-container.enemy .attack,
+.scoreboard-container.enemy .defense,
+.scoreboard-container.enemy .midfield,
+.scoreboard-container.enemy .chance,
+.scoreboard-container.enemy .smash {
+    background-color: #ADD8E6;
+}
+
+.scoreboard-container.enemy .special {
+    background-color: #E6F3FF;
+}
+
 
 .game-info-container .game-info-row:last-child {
     margin-bottom: 10px;
