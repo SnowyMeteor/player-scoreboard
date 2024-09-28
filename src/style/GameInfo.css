@@ -103,6 +103,25 @@
     border-color: #8BC34A;
 }
 
+.game-info-container .p-button.p-button-statistics.inactive,
+.game-info-container .p-button.p-button-back-to-game.inactive {
+    background-color: #FFFFFF;
+    color: #333333;
+}
+
+.game-info-container .p-button.p-button-statistics.inactive {
+    border-color: #FFC466;
+}
+
+.game-info-container .p-button.p-button-back-to-game.inactive {
+    border-color: #9CCC65;
+}
+
+.game-info-container .p-button.p-button-statistics.inactive:hover,
+.game-info-container .p-button.p-button-back-to-game.inactive:hover {
+    background-color: #f0f0f0;
+}
+
 .game-info-container .game-info-item label {
     font-size: 18px;
 }

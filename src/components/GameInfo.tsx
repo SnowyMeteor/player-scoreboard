@@ -4,7 +4,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 import '../style/GameInfo.css';
 
-const roundsOptions = Array.from({ length: 6 }, (_, i) => ({ label: `${i + 1}`, value: i + 1 }));
+const roundsOptions = Array.from({ length: 10 }, (_, i) => ({ label: `${i + 1}`, value: i + 1 }));
 const winLossOptions = [
     { label: '勝', value: 'win' },
     { label: '負', value: 'lose' }
@@ -15,9 +15,10 @@ interface GameInfoProps {
     onRoundChange: (round: number) => void;
     onShowStatistics: () => void;
     onBackToGame: () => void;
+    currentPage: 'game' | 'statistics';
 }
 
-const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange, onShowStatistics, onBackToGame }) => {
+const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange, onShowStatistics, onBackToGame, currentPage }) => {
     const [gameName, setGameName] = useState('');
     const [score, setScore] = useState('');
     const [result, setResult] = useState<string | null>(null);
@@ -114,12 +115,19 @@ const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange, onShow
             {/* 統計結果、回到比賽按鈕 */}
             <div className="game-info-row">
                 <div className="game-info-column game-info-column-left">
-                    <Button label="回到比賽" className="p-button-back-to-game w-full" onClick={onBackToGame} />
+                    <Button
+                        label="回到比賽"
+                        className={`p-button-back-to-game w-full ${currentPage === 'game' ? 'active' : 'inactive'}`}
+                        onClick={onBackToGame}
+                    />
                 </div>
                 <div className="game-info-column game-info-column-right">
-                    <Button label="統計結果" className="p-button-statistics w-full" onClick={onShowStatistics} />
+                    <Button
+                        label="統計結果"
+                        className={`p-button-statistics w-full ${currentPage === 'statistics' ? 'active' : 'inactive'}`}
+                        onClick={onShowStatistics}
+                    />
                 </div>
-
             </div>
         </div>
     );

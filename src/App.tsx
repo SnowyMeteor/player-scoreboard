@@ -64,6 +64,8 @@ function App() {
   const [roundsData, setRoundsData] = useState<RoundData[]>([]);
   const [showStatistics, setShowStatistics] = useState(false);
   const [currentTeam, setCurrentTeam] = useState<'our' | 'enemy'>('our');
+  const [currentPage, setCurrentPage] = useState<'game' | 'statistics'>('game');
+
 
   useEffect(() => {
     setRoundsData([{
@@ -145,13 +147,15 @@ function App() {
     });
   }, [currentRound]);
 
-  const handleShowStatistics = () => {
+  const handleShowStatistics = useCallback(() => {
     setShowStatistics(true);
-  };
+    setCurrentPage('statistics');
+  }, []);
 
-  const handleBackToGame = () => {
+  const handleBackToGame = useCallback(() => {
     setShowStatistics(false);
-  };
+    setCurrentPage('game');
+  }, []);
 
   return (
     <div className="App">
@@ -160,6 +164,7 @@ function App() {
         onRoundChange={handleRoundChange}
         onShowStatistics={handleShowStatistics}
         onBackToGame={handleBackToGame}
+        currentPage={currentPage}
       />
       {showStatistics ? (
         <div className="statistics-container">
@@ -182,34 +187,34 @@ function App() {
           />
         </div>
       ) : (
-        <div {...handlers} style={{ overflow: 'hidden' }}>
-          <div style={{
-            display: 'flex',
-            transition: 'transform 0.3s ease-out',
-            transform: `translateX(-${index * 100}%)`
-          }}>
-            <div className="scoreboard-wrapper" style={{ flex: '0 0 100%' }}>
-              <ScoreBoard
-                team="our"
-                data={roundsData[currentRound - 1]?.ourTeam || { player1: '', player2: '', scores: initialTeamScores }}
-                onDataChange={(data) => updateTeamData('ourTeam', data)}
-              />
-            </div>
-            <div className="scoreboard-wrapper" style={{ flex: '0 0 100%' }}>
-              <ScoreBoard
-                team="enemy"
-                data={roundsData[currentRound - 1]?.enemyTeam || { player1: '', player2: '', scores: initialTeamScores }}
-                onDataChange={(data) => updateTeamData('enemyTeam', data)}
-              />
+        <>
+          <div {...handlers} style={{ overflow: 'hidden' }}>
+            <div style={{
+              display: 'flex',
+              transition: 'transform 0.3s ease-out',
+              transform: `translateX(-${index * 100}%)`
+            }}>
+              <div className="scoreboard-wrapper" style={{ flex: '0 0 100%' }}>
+                <ScoreBoard
+                  team="our"
+                  data={roundsData[currentRound - 1]?.ourTeam || { player1: '', player2: '', scores: initialTeamScores }}
+                  onDataChange={(data) => updateTeamData('ourTeam', data)}
+                />
+              </div>
+              <div className="scoreboard-wrapper" style={{ flex: '0 0 100%' }}>
+                <ScoreBoard
+                  team="enemy"
+                  data={roundsData[currentRound - 1]?.enemyTeam || { player1: '', player2: '', scores: initialTeamScores }}
+                  onDataChange={(data) => updateTeamData('enemyTeam', data)}
+                />
+              </div>
             </div>
           </div>
-        </div>
-      )}
-      {!showStatistics && (
-        <Notes
-          value={roundsData[currentRound - 1]?.notes || ''}
-          onChange={updateNotes}
-        />
+          <Notes
+            value={roundsData[currentRound - 1]?.notes || ''}
+            onChange={updateNotes}
+          />
+        </>
       )}
     </div>
   );
