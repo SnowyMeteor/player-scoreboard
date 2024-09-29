@@ -31,27 +31,12 @@ const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange, curren
 
     // Handle score input change and formatting
     const handleScoreChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value.replace(/[^0-9]/g, '');
-        let formattedValue = ':';
+        const value = e.target.value;
 
-        if (value.length > 0) {
-            const left = value.slice(0, 2).padStart(2, '0');
-            formattedValue = left + formattedValue;
+        // Limit the input length to 10 characters
+        if (value.length <= 10) {
+            setScore(value);
         }
-        if (value.length > 2) {
-            const right = value.slice(2, 4).padStart(2, '0');
-            formattedValue = formattedValue + right;
-        }
-
-        setScore(formattedValue);
-
-        // Set cursor position after state update
-        setTimeout(() => {
-            if (inputRef.current) {
-                const cursorPosition = value.length > 2 ? value.length + 1 : value.length;
-                inputRef.current.setSelectionRange(cursorPosition, cursorPosition);
-            }
-        }, 0);
     };
 
     return (
