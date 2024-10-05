@@ -1,9 +1,10 @@
-/* Main app styles */
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-/* Logo styles */
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -15,7 +16,6 @@
   }
 }
 
-/* Header styles */
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -27,73 +27,29 @@
   color: white;
 }
 
-/* Link styles */
 .App-link {
   color: #FFFFFF;
 }
 
-/* Animation keyframes */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
-
   to {
     transform: rotate(360deg);
   }
 }
 
-/* Button container styles */
-.button-container {
+.statistics-container {
+  flex-grow: 1;
   display: flex;
-  justify-content: space-between;
-  padding-left: 10%;
-  padding-right: 10%;
-  margin-top: 1.2rem;
-  margin-bottom: 2rem;
+  flex-direction: column;
 }
 
-/* Button styles */
-.button-container .p-button {
-  height: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  border-radius: 30px;
-  width: 48%;
-  background-color: #FFFFFF;
-  transition: all 0.3s ease;
-  border-width: 2px;
-  border-style: solid;
+.scoreboard-wrapper {
+  flex-grow: 1;
 }
 
-.button-container .p-button-back-to-game {
-  border-color: #9CCC65;
-  color: #9CCC65;
-}
-
-.button-container .p-button-statistics {
-  border-color: #FFC466;
-  color: #FFC466;
-}
-
-.button-container .p-button-back-to-game.active {
-  background-color: #9CCC65;
-  color: #FFFFFF;
-}
-
-.button-container .p-button-statistics.active {
-  background-color: #FFC466;
-  color: #FFFFFF;
-}
-
-.button-container .p-button-back-to-game:hover {
-  background-color: #9CCC65;
-  color: #FFFFFF;
-}
-
-.button-container .p-button-statistics:hover {
-  background-color: #FFC466;
-  color: #FFFFFF;
+.App > :last-child {
+  margin-top: auto;
 }

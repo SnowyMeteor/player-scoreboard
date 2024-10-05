@@ -1,0 +1,147 @@
+/* Game Control Panel Styles */
+.game-control-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 10%;
+  margin-top: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+/* Button Row Styles */
+.game-control-panel .button-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.game-control-panel .button-row:last-child {
+  margin-bottom: 0;
+}
+
+/* Common Button Styles */
+.game-control-panel .p-button {
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  border-width: 2px;
+  border-style: solid;
+}
+
+/* Button Width Styles */
+.game-control-panel .button-row:first-child .p-button {
+  width: 48%; /* First row buttons width */
+}
+
+.game-control-panel .button-row:last-child .p-button {
+  width: 100%; /* Second row button width */
+}
+
+/* Specific Button Styles */
+/* "Back to Game" Button */
+.game-control-panel .p-button-back-to-game {
+  border-color: #9CCC65;
+  color: #9CCC65;
+}
+
+.game-control-panel .p-button-back-to-game.active,
+.game-control-panel .p-button-back-to-game:hover {
+  background-color: #9CCC65;
+  color: #FFFFFF;
+}
+
+/* "Statistics" Button */
+.game-control-panel .p-button-statistics {
+  border-color: #FFC466;
+  color: #FFC466;
+}
+
+.game-control-panel .p-button-statistics.active,
+.game-control-panel .p-button-statistics:hover {
+  background-color: #FFC466;
+  color: #FFFFFF;
+}
+
+/* "Reset" Button */
+.game-control-panel .p-button-reset {
+  border-color: #A0A0A0;
+  color: #FFFFFF;
+  background-color: #A0A0A0;
+  font-size: 16px;
+}
+
+/* Confirm Dialog Styles */
+.custom-confirm-dialog {
+  width: 80vw !important;
+  border-radius: 10px !important;
+  overflow: hidden;
+}
+
+/* Dialog Header */
+.custom-confirm-dialog .p-dialog-header {
+  background-color: #FFFFFF;
+  border-radius: 10px 10px 0 0;
+  border-bottom: none !important;
+}
+
+/* Dialog Content */
+.custom-confirm-dialog .p-dialog-content {
+  background-color: #f8f9fa;
+  padding: 2rem;
+}
+
+/* Dialog Footer */
+.custom-confirm-dialog .p-dialog-footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 1.5rem 1.5rem !important;
+  border-top: none !important;
+  background-color: #FFFFFF;
+  border-radius: 0 0 10px 10px;
+}
+
+/* Dialog Footer Buttons */
+.custom-confirm-dialog .p-dialog-footer button {
+  flex: 0 0 48%;
+  margin: 0;
+  border-radius: 5px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border: none !important;
+  transition: background-color 0.3s ease;
+  background-color: #A0A0A0 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 0 10px;
+}
+
+/* Button Icon Styles */
+.custom-confirm-dialog .p-dialog-footer button .p-button-icon {
+  font-size: 0.9rem;
+  margin-right: -15px;
+  margin-left: 25px;
+}
+
+/* Button Active State */
+.custom-confirm-dialog .p-dialog-footer button:active {
+  background-color: #BDBDBD !important;
+}
+
+/* Ensure confirm button is on the left */
+.custom-confirm-dialog .p-dialog-footer button:first-child {
+  order: 1;
+}
+
+/* Active effect for touch devices */
+@media (hover: none) {
+  .custom-confirm-dialog .p-dialog-footer button:active {
+    background-color: #BDBDBD !important;
+  }
+}

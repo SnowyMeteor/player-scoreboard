@@ -6,6 +6,7 @@ import GameInfo from './components/GameInfo';
 import ScoreBoard from './components/ScoreBoard';
 import StatisticsBoard from './components/StatisticsBoard';
 import Notes from './components/Notes';
+import GameControlPanel from './components/GameControlPanel';
 
 // Interface definitions for scores
 interface CategoryScores {
@@ -166,6 +167,11 @@ function App() {
     trackMouse: true
   });
 
+  // Reset the game
+  const handleReset = useCallback(() => {
+    console.log('Reset functionality to be implemented');
+  }, []);
+
   return (
     <div className="App">
       <GameInfo
@@ -224,18 +230,12 @@ function App() {
         onChange={showStatistics ? () => { } : updateNotes}
         readOnly={showStatistics}
       />
-      <div className="button-container">
-        <Button
-          label="回到比賽"
-          className={`p-button-back-to-game ${currentPage === 'game' ? 'active' : 'inactive'}`}
-          onClick={handleBackToGame}
-        />
-        <Button
-          label="統計結果"
-          className={`p-button-statistics ${currentPage === 'statistics' ? 'active' : 'inactive'}`}
-          onClick={handleShowStatistics}
-        />
-      </div>
+      <GameControlPanel
+        currentPage={currentPage}
+        onBackToGame={handleBackToGame}
+        onShowStatistics={handleShowStatistics}
+        onReset={handleReset}
+      />
     </div>
   );
 }
