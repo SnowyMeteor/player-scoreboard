@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSwipeable } from 'react-swipeable';
-import { Button } from 'primereact/button';
 import './App.css';
 import GameInfo from './components/GameInfo';
 import ScoreBoard from './components/ScoreBoard';
@@ -65,6 +64,9 @@ const initialTeamScores: TeamScores = {
 
 function App() {
   // Initialize state with data from localStorage or default values
+  const [gameName, setGameName] = useState(() => loadFromLocalStorage('gameName') || '');
+  const [score, setScore] = useState(() => loadFromLocalStorage('score') || '');
+  const [result, setResult] = useState<string | null>(() => loadFromLocalStorage('result') || null);
   const [index, setIndex] = useState(0);
   const [currentRound, setCurrentRound] = useState(() => loadFromLocalStorage('currentRound') || 1);
   const [roundsData, setRoundsData] = useState<RoundData[]>(() => loadFromLocalStorage('roundsData') || []);
@@ -87,12 +89,15 @@ function App() {
 
   // Save data to localStorage whenever it changes
   useEffect(() => {
+    saveToLocalStorage('gameName', gameName);
+    saveToLocalStorage('score', score);
+    saveToLocalStorage('result', result);
     saveToLocalStorage('currentRound', currentRound);
     saveToLocalStorage('roundsData', roundsData);
     saveToLocalStorage('showStatistics', showStatistics);
     saveToLocalStorage('currentTeam', currentTeam);
     saveToLocalStorage('currentPage', currentPage);
-  }, [currentRound, roundsData, showStatistics, currentTeam, currentPage]);
+  }, [gameName, score, result, currentRound, roundsData, showStatistics, currentTeam, currentPage]);
 
   // Handle round change
   const handleRoundChange = useCallback((round: number) => {
@@ -195,18 +200,17 @@ function App() {
     };
 
     // Reset all state
+    setGameName('');
+    setScore('');
+    setResult(null);
     setCurrentRound(1);
     setRoundsData([initialRound]);
     setShowStatistics(false);
     setCurrentTeam('our');
     setCurrentPage('game');
 
-    // Save initial state to localStorage
-    saveToLocalStorage('currentRound', 1);
-    saveToLocalStorage('roundsData', [initialRound]);
-    saveToLocalStorage('showStatistics', false);
-    saveToLocalStorage('currentTeam', 'our');
-    saveToLocalStorage('currentPage', 'game');
+    // Clear localStorage
+    localStorage.clear();
   }, []);
 
   return (
@@ -216,6 +220,12 @@ function App() {
         currentRound={currentRound}
         onRoundChange={handleRoundChange}
         currentPage={currentPage}
+        gameName={gameName}
+        setGameName={setGameName}
+        score={score}
+        setScore={setScore}
+        result={result}
+        setResult={setResult}
       />
       {showStatistics ? (
         // Render statistics board when showStatistics is true

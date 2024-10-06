@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import '../style/GameInfo.css';
@@ -15,14 +15,25 @@ interface GameInfoProps {
     currentRound: number;
     onRoundChange: (round: number) => void;
     currentPage: 'game' | 'statistics';
+    gameName: string;
+    setGameName: (name: string) => void;
+    score: string;
+    setScore: (score: string) => void;
+    result: string | null;
+    setResult: (result: string | null) => void;
 }
 
-const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange, currentPage }) => {
-    // State for game name, score, and result
-    const [gameName, setGameName] = useState('');
-    const [score, setScore] = useState('');
-    const [result, setResult] = useState<string | null>(null);
-
+const GameInfo: React.FC<GameInfoProps> = ({
+    currentRound,
+    onRoundChange,
+    currentPage,
+    gameName,
+    setGameName,
+    score,
+    setScore,
+    result,
+    setResult
+}) => {
     // Ref for score input element
     const inputRef = useRef<HTMLInputElement>(null);
 
