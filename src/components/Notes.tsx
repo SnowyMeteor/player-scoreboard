@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { InputTextarea } from 'primereact/inputtextarea';
 import '../style/Notes.css';
 
+// Interface for Notes component props
 interface NotesProps {
     value: string;
     onChange: (value: string) => void;
@@ -9,6 +10,7 @@ interface NotesProps {
 }
 
 const Notes: React.FC<NotesProps> = ({ value, onChange, readOnly = false }) => {
+    // Ref to access the textarea DOM element
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     useEffect(() => {
@@ -20,7 +22,7 @@ const Notes: React.FC<NotesProps> = ({ value, onChange, readOnly = false }) => {
 
     // Function to adjust the height of the textarea based on its content
     const adjustTextareaHeight = (element: HTMLTextAreaElement) => {
-        element.style.height = 'auto'; // Reset height to auto to calculate new height
+        element.style.height = 'auto';
         element.style.height = `${element.scrollHeight}px`;
     };
 

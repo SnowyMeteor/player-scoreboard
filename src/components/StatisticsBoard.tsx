@@ -3,16 +3,17 @@ import { InputText } from 'primereact/inputtext';
 import { useSwipeable } from 'react-swipeable';
 import '../style/StatisticsBoard.css';
 
-// Type definitions
+// Type definitions for categories
 type Category = 'attack' | 'defense' | 'midfield' | 'chance' | 'smash';
 type SpecialCategory = 'firstServeRate' | 'receiveErrorRate' | 'servePoints' | 'doubleFaults';
 
-// Interface definitions
+// Interface definitions for category scores
 interface CategoryScores {
     success: number;
     fail: number;
 }
 
+// Interface definitions for player scores
 interface PlayerScores {
     attack: CategoryScores;
     defense: CategoryScores;
@@ -25,22 +26,26 @@ interface PlayerScores {
     doubleFaults: number;
 }
 
+// Interface definitions for team scores
 interface TeamScores {
     [key: string]: PlayerScores;
 }
 
+// Interface definitions for team data
 interface TeamData {
     player1: string;
     player2: string;
     scores: TeamScores;
 }
 
+// Interface definitions for round data
 interface RoundData {
     ourTeam: TeamData;
     enemyTeam: TeamData;
     notes: string;
 }
 
+// Interface definitions for team properties
 interface TeamProps {
     team: 'our' | 'enemy';
     roundsData: RoundData[];
@@ -48,6 +53,7 @@ interface TeamProps {
     player2Name: string;
 }
 
+// Interface definitions for StatisticsBoard props
 interface StatisticsBoardProps {
     ourTeam: TeamProps;
     enemyTeam: TeamProps;
@@ -71,10 +77,12 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
             doubleFaults: 0
         };
 
+        // Reduce rounds data to calculate total scores
         return teamProps.roundsData.reduce((acc, round) => {
             const currentTeamData = teamProps.team === 'our' ? round.ourTeam : round.enemyTeam;
             const playerScores = currentTeamData.scores[playerKey];
 
+            // Accumulate scores for each category
             (Object.keys(playerScores) as Array<keyof PlayerScores>).forEach(category => {
                 if (typeof acc[category] === 'number' && typeof playerScores[category] === 'number') {
                     (acc[category] as number) += (playerScores[category] as number);
@@ -95,6 +103,7 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
 
         const categories: Category[] = ['attack', 'defense', 'midfield', 'chance', 'smash'];
 
+        // Calculate rates based on total success and fail counts
         const calculateRates = (scores: PlayerScores) => {
             let totalSuccess = 0;
             let totalFail = 0;
@@ -115,7 +124,7 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
         };
     };
 
-    // Break text after second character for display
+    // Break text after the second character for display
     const breakAfterSecondCharacter = (text: string) => {
         if (text.length > 2) {
             return (
@@ -242,7 +251,7 @@ const StatisticsBoard: React.FC<StatisticsBoardProps> = ({ ourTeam, enemyTeam, c
         );
     };
 
-    // Set up swipe handlers
+    // Set up swipe handlers for team switching
     const handlers = useSwipeable({
         onSwipedLeft: () => onSwipe('enemy'),
         onSwipedRight: () => onSwipe('our'),

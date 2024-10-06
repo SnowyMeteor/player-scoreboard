@@ -192,4 +192,5 @@ const ScoreBoard: React.FC<ScoreBoardProps> = ({ team, data, onDataChange }) => 
     );
 }
 
+// Use React.memo to prevent unnecessary re-renders
 export default React.memo(ScoreBoard);

@@ -22,7 +22,12 @@ const GameControlPanel: React.FC<GameControlPanelProps> = ({
       header: '比賽重置',
       icon: 'pi pi-exclamation-triangle',
       className: 'custom-confirm-dialog',
-      accept: onReset,
+      accept: () => {
+        // Clear localStorage
+        localStorage.clear();
+        // Call the onReset function passed from the parent component
+        onReset();
+      },
       reject: () => {},
       acceptLabel: '確認',
       rejectLabel: '取消',

@@ -10,6 +10,7 @@ const winLossOptions = [
     { label: '負', value: 'lose' }
 ];
 
+// Props interface for GameInfo component
 interface GameInfoProps {
     currentRound: number;
     onRoundChange: (round: number) => void;
@@ -17,9 +18,12 @@ interface GameInfoProps {
 }
 
 const GameInfo: React.FC<GameInfoProps> = ({ currentRound, onRoundChange, currentPage }) => {
+    // State for game name, score, and result
     const [gameName, setGameName] = useState('');
     const [score, setScore] = useState('');
     const [result, setResult] = useState<string | null>(null);
+
+    // Ref for score input element
     const inputRef = useRef<HTMLInputElement>(null);
 
     // Set initial cursor position for score input

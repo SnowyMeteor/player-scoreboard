@@ -7,6 +7,7 @@ import ScoreBoard from './components/ScoreBoard';
 import StatisticsBoard from './components/StatisticsBoard';
 import Notes from './components/Notes';
 import GameControlPanel from './components/GameControlPanel';
+import { saveToLocalStorage, loadFromLocalStorage } from './utils/localStorage';
 
 // Interface definitions for scores
 interface CategoryScores {
@@ -63,27 +64,42 @@ const initialTeamScores: TeamScores = {
 };
 
 function App() {
+  // Initialize state with data from localStorage or default values
   const [index, setIndex] = useState(0);
-  const [currentRound, setCurrentRound] = useState(1);
-  const [roundsData, setRoundsData] = useState<RoundData[]>([]);
-  const [showStatistics, setShowStatistics] = useState(false);
-  const [currentTeam, setCurrentTeam] = useState<'our' | 'enemy'>('our');
-  const [currentPage, setCurrentPage] = useState<'game' | 'statistics'>('game');
+  const [currentRound, setCurrentRound] = useState(() => loadFromLocalStorage('currentRound') || 1);
+  const [roundsData, setRoundsData] = useState<RoundData[]>(() => loadFromLocalStorage('roundsData') || []);
+  const [showStatistics, setShowStatistics] = useState(() => loadFromLocalStorage('showStatistics') || false);
+  const [currentTeam, setCurrentTeam] = useState<'our' | 'enemy'>(() => loadFromLocalStorage('currentTeam') || 'our');
+  const [currentPage, setCurrentPage] = useState<'game' | 'statistics'>(() => loadFromLocalStorage('currentPage') || 'game');
 
-  // Initialize rounds data
+  // Initialize rounds data if it's empty
   useEffect(() => {
-    setRoundsData([{
-      ourTeam: { player1: '', player2: '', scores: JSON.parse(JSON.stringify(initialTeamScores)) },
-      enemyTeam: { player1: '', player2: '', scores: JSON.parse(JSON.stringify(initialTeamScores)) },
-      notes: ''
-    }]);
+    if (roundsData.length === 0) {
+      const initialRound = {
+        ourTeam: { player1: '', player2: '', scores: JSON.parse(JSON.stringify(initialTeamScores)) },
+        enemyTeam: { player1: '', player2: '', scores: JSON.parse(JSON.stringify(initialTeamScores)) },
+        notes: ''
+      };
+      setRoundsData([initialRound]);
+      saveToLocalStorage('roundsData', [initialRound]);
+    }
   }, []);
+
+  // Save data to localStorage whenever it changes
+  useEffect(() => {
+    saveToLocalStorage('currentRound', currentRound);
+    saveToLocalStorage('roundsData', roundsData);
+    saveToLocalStorage('showStatistics', showStatistics);
+    saveToLocalStorage('currentTeam', currentTeam);
+    saveToLocalStorage('currentPage', currentPage);
+  }, [currentRound, roundsData, showStatistics, currentTeam, currentPage]);
 
   // Handle round change
   const handleRoundChange = useCallback((round: number) => {
     setCurrentRound(round);
     setRoundsData(prev => {
       if (round > prev.length) {
+        // If new round is greater than current data, add new rounds
         const lastRound = prev[prev.length - 1];
         const newRounds = [...prev];
         for (let i = prev.length; i < round; i++) {
@@ -112,11 +128,13 @@ function App() {
     setRoundsData(prev => {
       const newData = prev.map((round, index) => {
         if (index === currentRound - 1) {
+          // Update data for current round
           return {
             ...round,
             [team]: data
           };
         } else {
+          // Update player names for other rounds
           return {
             ...round,
             [team]: {
@@ -137,6 +155,7 @@ function App() {
     setRoundsData(prev => {
       const newData = [...prev];
       if (!newData[currentRound - 1]) {
+        // If current round doesn't exist, create it
         newData[currentRound - 1] = {
           ourTeam: { player1: '', player2: '', scores: JSON.parse(JSON.stringify(initialTeamScores)) },
           enemyTeam: { player1: '', player2: '', scores: JSON.parse(JSON.stringify(initialTeamScores)) },
@@ -160,7 +179,7 @@ function App() {
     setCurrentPage('game');
   }, []);
 
-  // Swipe handlers
+  // Swipe handlers for mobile interaction
   const handlers = useSwipeable({
     onSwipedLeft: () => setIndex(Math.min(index + 1, 1)),
     onSwipedRight: () => setIndex(Math.max(index - 1, 0)),
@@ -169,17 +188,37 @@ function App() {
 
   // Reset the game
   const handleReset = useCallback(() => {
-    console.log('Reset functionality to be implemented');
+    const initialRound = {
+      ourTeam: { player1: '', player2: '', scores: JSON.parse(JSON.stringify(initialTeamScores)) },
+      enemyTeam: { player1: '', player2: '', scores: JSON.parse(JSON.stringify(initialTeamScores)) },
+      notes: ''
+    };
+
+    // Reset all state
+    setCurrentRound(1);
+    setRoundsData([initialRound]);
+    setShowStatistics(false);
+    setCurrentTeam('our');
+    setCurrentPage('game');
+
+    // Save initial state to localStorage
+    saveToLocalStorage('currentRound', 1);
+    saveToLocalStorage('roundsData', [initialRound]);
+    saveToLocalStorage('showStatistics', false);
+    saveToLocalStorage('currentTeam', 'our');
+    saveToLocalStorage('currentPage', 'game');
   }, []);
 
   return (
     <div className="App">
+      {/* Game information component */}
       <GameInfo
         currentRound={currentRound}
         onRoundChange={handleRoundChange}
         currentPage={currentPage}
       />
       {showStatistics ? (
+        // Render statistics board when showStatistics is true
         <div className="statistics-container">
           <StatisticsBoard
             ourTeam={{
@@ -200,12 +239,14 @@ function App() {
           />
         </div>
       ) : (
+        // Render scoreboard when showStatistics is false
         <div {...handlers} style={{ overflow: 'hidden' }}>
           <div style={{
             display: 'flex',
             transition: 'transform 0.3s ease-out',
             transform: `translateX(-${index * 100}%)`
           }}>
+            {/* Our team scoreboard */}
             <div className="scoreboard-wrapper" style={{ flex: '0 0 100%' }}>
               <ScoreBoard
                 team="our"
@@ -213,6 +254,7 @@ function App() {
                 onDataChange={(data) => updateTeamData('ourTeam', data)}
               />
             </div>
+            {/* Enemy team scoreboard */}
             <div className="scoreboard-wrapper" style={{ flex: '0 0 100%' }}>
               <ScoreBoard
                 team="enemy"
@@ -223,6 +265,7 @@ function App() {
           </div>
         </div>
       )}
+      {/* Notes component */}
       <Notes
         value={showStatistics
           ? roundsData.map((round, index) => `第 ${index + 1} 局：\n${round.notes}`).join('\n\n')
@@ -230,6 +273,7 @@ function App() {
         onChange={showStatistics ? () => { } : updateNotes}
         readOnly={showStatistics}
       />
+      {/* Game control panel */}
       <GameControlPanel
         currentPage={currentPage}
         onBackToGame={handleBackToGame}
