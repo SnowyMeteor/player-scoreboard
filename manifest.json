@@ -3,18 +3,18 @@
   "name": "Soft Tennis Match Analysis",
   "icons": [
     {
-      "src": "favicon.png",
+      "src": "favicon.jpg",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/png"
+      "type": "image/jpeg"
     },
     {
-      "src": "favicon.png",
-      "type": "image/png",
+      "src": "favicon.jpg",
+      "type": "image/jpeg",
       "sizes": "192x192"
     },
     {
-      "src": "favicon.png",
-      "type": "image/png",
+      "src": "favicon.jpg",
+      "type": "image/jpeg",
       "sizes": "512x512"
     }
   ],
