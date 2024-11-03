@@ -48,8 +48,7 @@ const GameInfo: React.FC<GameInfoProps> = ({
     const handleScoreChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
 
-        // Limit the input length to 10 characters
-        if (value.length <= 10) {
+        if (value === '' || /^\d{1,2}$/.test(value)) {
             setScore(value);
         }
     };
@@ -99,9 +98,12 @@ const GameInfo: React.FC<GameInfoProps> = ({
                         optionLabel="label"
                     />
                 </div>
+                
                 {/* Score Input */}
                 <div className="game-info-column game-info-column-right">
-                    <label htmlFor="score" className="block font-bold mb-2 text-left">比數</label>
+                    <label htmlFor="score" className="block font-bold mb-2 text-left">
+                        比數 <span className="score-hint">(0-99)</span>
+                    </label>
                     <InputText
                         id="score"
                         ref={inputRef}

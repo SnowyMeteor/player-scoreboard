@@ -51,6 +51,12 @@
     text-align: left !important;
 }
 
+.game-info-container .score-hint {
+    font-size: 0.85em;
+    color: #666;
+    font-weight: normal;
+}
+
 /* Label styles */
 .game-info-container .game-info-item label,
 .game-info-container #rounds+label,
