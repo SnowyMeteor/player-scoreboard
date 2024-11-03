@@ -21,6 +21,7 @@ interface GameInfoProps {
     setScore: (score: string) => void;
     result: string | null;
     setResult: (result: string | null) => void;
+    readOnly: boolean;
 }
 
 const GameInfo: React.FC<GameInfoProps> = ({
@@ -32,7 +33,8 @@ const GameInfo: React.FC<GameInfoProps> = ({
     score,
     setScore,
     result,
-    setResult
+    setResult,
+    readOnly
 }) => {
     // Ref for score input element
     const inputRef = useRef<HTMLInputElement>(null);
@@ -61,6 +63,7 @@ const GameInfo: React.FC<GameInfoProps> = ({
                 <InputText
                     id="gameName"
                     value={gameName}
+                    disabled={readOnly}
                     onChange={(e) => setGameName(e.target.value)}
                     placeholder="輸入比賽名稱"
                     className="w-full text-left"
@@ -74,6 +77,7 @@ const GameInfo: React.FC<GameInfoProps> = ({
                     id="rounds"
                     options={roundsOptions}
                     value={currentRound}
+                    disabled={readOnly}
                     onChange={(e) => onRoundChange(e.value)}
                     placeholder="選擇局數"
                     className="w-full text-left"
@@ -92,6 +96,7 @@ const GameInfo: React.FC<GameInfoProps> = ({
                         id="result"
                         options={winLossOptions}
                         value={result}
+                        disabled={readOnly}
                         onChange={(e) => setResult(e.value)}
                         placeholder="勝 / 負"
                         className="w-full text-left"
@@ -109,6 +114,7 @@ const GameInfo: React.FC<GameInfoProps> = ({
                         ref={inputRef}
                         placeholder="輸入比數"
                         value={score}
+                        disabled={readOnly}
                         onChange={handleScoreChange}
                         className="w-full text-left game-info-score-input"
                     />

@@ -241,6 +241,7 @@ function App() {
         setScore={(newScore) => handleScoreChange(index === 0 ? 'our' : 'enemy', newScore)}
         result={index === 0 ? ourResult : enemyResult}
         setResult={(newResult) => handleResultChange(index === 0 ? 'our' : 'enemy', newResult)}
+        readOnly={showStatistics}
       />
       {showStatistics ? (
         <div className="statistics-container">
