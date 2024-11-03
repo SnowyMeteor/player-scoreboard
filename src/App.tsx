@@ -65,8 +65,10 @@ const initialTeamScores: TeamScores = {
 function App() {
   // Initialize state with data from localStorage or default values
   const [gameName, setGameName] = useState(() => loadFromLocalStorage('gameName') || '');
-  const [score, setScore] = useState(() => loadFromLocalStorage('score') || '');
-  const [result, setResult] = useState<string | null>(() => loadFromLocalStorage('result') || null);
+  const [ourScore, setOurScore] = useState(() => loadFromLocalStorage('ourScore') || '');
+  const [enemyScore, setEnemyScore] = useState(() => loadFromLocalStorage('enemyScore') || '');
+  const [ourResult, setOurResult] = useState<string | null>(() => loadFromLocalStorage('ourResult') || null);
+  const [enemyResult, setEnemyResult] = useState<string | null>(() => loadFromLocalStorage('enemyResult') || null);
   const [index, setIndex] = useState(0);
   const [currentRound, setCurrentRound] = useState(() => loadFromLocalStorage('currentRound') || 1);
   const [roundsData, setRoundsData] = useState<RoundData[]>(() => loadFromLocalStorage('roundsData') || []);
@@ -90,21 +92,21 @@ function App() {
   // Save data to localStorage whenever it changes
   useEffect(() => {
     saveToLocalStorage('gameName', gameName);
-    saveToLocalStorage('score', score);
-    saveToLocalStorage('result', result);
+    saveToLocalStorage('ourScore', ourScore);
+    saveToLocalStorage('enemyScore', enemyScore);
+    saveToLocalStorage('ourResult', ourResult);
+    saveToLocalStorage('enemyResult', enemyResult);
     saveToLocalStorage('currentRound', currentRound);
     saveToLocalStorage('roundsData', roundsData);
     saveToLocalStorage('showStatistics', showStatistics);
     saveToLocalStorage('currentTeam', currentTeam);
     saveToLocalStorage('currentPage', currentPage);
-  }, [gameName, score, result, currentRound, roundsData, showStatistics, currentTeam, currentPage]);
+  }, [gameName, ourScore, enemyScore, ourResult, enemyResult, currentRound, roundsData, showStatistics, currentTeam, currentPage]);
 
-  // Handle round change
   const handleRoundChange = useCallback((round: number) => {
     setCurrentRound(round);
     setRoundsData(prev => {
       if (round > prev.length) {
-        // If new round is greater than current data, add new rounds
         const lastRound = prev[prev.length - 1];
         const newRounds = [...prev];
         for (let i = prev.length; i < round; i++) {
@@ -128,18 +130,33 @@ function App() {
     });
   }, []);
 
-  // Update team data
+  const handleResultChange = (team: 'our' | 'enemy', newResult: string | null) => {
+    if (team === 'our') {
+      setOurResult(newResult);
+      setEnemyResult(newResult === 'win' ? 'lose' : newResult === 'lose' ? 'win' : null);
+    } else {
+      setEnemyResult(newResult);
+      setOurResult(newResult === 'win' ? 'lose' : newResult === 'lose' ? 'win' : null);
+    }
+  };
+
+  const handleScoreChange = (team: 'our' | 'enemy', newScore: string) => {
+    if (team === 'our') {
+      setOurScore(newScore);
+    } else {
+      setEnemyScore(newScore);
+    }
+  };
+
   const updateTeamData = useCallback((team: 'ourTeam' | 'enemyTeam', data: TeamData) => {
     setRoundsData(prev => {
       const newData = prev.map((round, index) => {
         if (index === currentRound - 1) {
-          // Update data for current round
           return {
             ...round,
             [team]: data
           };
         } else {
-          // Update player names for other rounds
           return {
             ...round,
             [team]: {
@@ -150,7 +167,6 @@ function App() {
           };
         }
       });
-
       return newData;
     });
   }, [currentRound]);
@@ -160,7 +176,6 @@ function App() {
     setRoundsData(prev => {
       const newData = [...prev];
       if (!newData[currentRound - 1]) {
-        // If current round doesn't exist, create it
         newData[currentRound - 1] = {
           ourTeam: { player1: '', player2: '', scores: JSON.parse(JSON.stringify(initialTeamScores)) },
           enemyTeam: { player1: '', player2: '', scores: JSON.parse(JSON.stringify(initialTeamScores)) },
@@ -199,36 +214,35 @@ function App() {
       notes: ''
     };
 
-    // Reset all state
     setGameName('');
-    setScore('');
-    setResult(null);
+    setOurScore('');
+    setEnemyScore('');
+    setOurResult(null);
+    setEnemyResult(null);
     setCurrentRound(1);
     setRoundsData([initialRound]);
     setShowStatistics(false);
     setCurrentTeam('our');
     setCurrentPage('game');
+    setIndex(0);
 
-    // Clear localStorage
     localStorage.clear();
   }, []);
 
   return (
     <div className="App">
-      {/* Game information component */}
       <GameInfo
         currentRound={currentRound}
         onRoundChange={handleRoundChange}
         currentPage={currentPage}
         gameName={gameName}
         setGameName={setGameName}
-        score={score}
-        setScore={setScore}
-        result={result}
-        setResult={setResult}
+        score={index === 0 ? ourScore : enemyScore}
+        setScore={(newScore) => handleScoreChange(index === 0 ? 'our' : 'enemy', newScore)}
+        result={index === 0 ? ourResult : enemyResult}
+        setResult={(newResult) => handleResultChange(index === 0 ? 'our' : 'enemy', newResult)}
       />
       {showStatistics ? (
-        // Render statistics board when showStatistics is true
         <div className="statistics-container">
           <StatisticsBoard
             ourTeam={{
@@ -249,14 +263,12 @@ function App() {
           />
         </div>
       ) : (
-        // Render scoreboard when showStatistics is false
         <div {...handlers} style={{ overflow: 'hidden' }}>
           <div style={{
             display: 'flex',
             transition: 'transform 0.3s ease-out',
             transform: `translateX(-${index * 100}%)`
           }}>
-            {/* Our team scoreboard */}
             <div className="scoreboard-wrapper" style={{ flex: '0 0 100%' }}>
               <ScoreBoard
                 team="our"
@@ -264,7 +276,6 @@ function App() {
                 onDataChange={(data) => updateTeamData('ourTeam', data)}
               />
             </div>
-            {/* Enemy team scoreboard */}
             <div className="scoreboard-wrapper" style={{ flex: '0 0 100%' }}>
               <ScoreBoard
                 team="enemy"
@@ -275,7 +286,6 @@ function App() {
           </div>
         </div>
       )}
-      {/* Notes component */}
       <Notes
         value={showStatistics
           ? roundsData.map((round, index) => `第 ${index + 1} 局：\n${round.notes}`).join('\n\n')
@@ -283,7 +293,6 @@ function App() {
         onChange={showStatistics ? () => { } : updateNotes}
         readOnly={showStatistics}
       />
-      {/* Game control panel */}
       <GameControlPanel
         currentPage={currentPage}
         onBackToGame={handleBackToGame}
